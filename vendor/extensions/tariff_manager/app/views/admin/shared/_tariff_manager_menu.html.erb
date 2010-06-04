@@ -1,0 +1,8 @@
+<% content_for :sidebar do %>
+
+  <ul class="sidebar">
+    <li<%= ' class="active"' if controller.controller_name == 'tariffs' %>><%= link_to 'Tarify', admin_tariffs_path %></li>
+    <li<%= ' class="active"' if controller.controller_name == 'operators' %>><%= link_to 'Operátoři', admin_operators_path %></li>
+  </ul>
+
+<% end %>

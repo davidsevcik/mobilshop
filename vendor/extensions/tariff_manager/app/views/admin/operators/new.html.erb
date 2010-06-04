@@ -1,0 +1,12 @@
+<%= render :partial => 'admin/shared/tariff_manager_menu' %>
+
+<h1>Nový operátor</h1>
+
+<%= error_messages_for :operator %>
+
+<% form_for(:operator, :url => collection_url) do |f| %>
+  <%= render :partial => "form", :locals => { :f => f } %>
+  <p>
+    <%= submit_tag t("create") %> <%= t("or") %> <%= link_to t("cancel"), admin_operators_path %>
+  </p>
+<% end %>

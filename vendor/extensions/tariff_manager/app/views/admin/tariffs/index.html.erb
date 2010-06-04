@@ -1,0 +1,31 @@
+<%= render :partial => 'admin/shared/tariff_manager_menu' %>
+
+<h1>Tarify</h1>
+
+<table class="admin-report" width="545">
+	<thead>
+		<tr>
+            <th>Operátor</th>
+      		<th>Název</th>
+      		<th>Cena</th>
+      		<th><%=t("action")%></th>
+    	</tr>
+  	</thead>
+	
+	<tbody>
+    	<% @tariffs.each do |tariff| %>
+		<tr class="<%= cycle('even', 'odd') %>">
+			<td><%= tariff.operator.name %></td>
+			<td><%= tariff.name %></td>
+            <td><%= tariff.price %></td>
+			<td>
+	          <%=link_to t("edit"), edit_object_url(tariff) %> |
+	          <%=link_to t("delete"), object_url(tariff), :method => :delete, :confirm=> 'Opravdu smazat?' %>
+	        </td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>
+
+
+<%= link_to 'Přidat tarif', new_object_url %>

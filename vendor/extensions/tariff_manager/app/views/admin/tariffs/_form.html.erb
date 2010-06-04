@@ -1,0 +1,34 @@
+<table class="admin-tariff" width="545">
+  <tr>
+    <td valign="top"><%= f.label :operator_id, 'Operátor' %></td>
+    <td><%= f.select :operator_id, Operator.all.collect {|op| [op.name, op.id]} %></td>
+  </tr>
+  <tr>
+    <td valign="top"><%= f.label :name, 'Jméno' %></td>
+    <td><%= f.text_field :name %></td>
+  </tr>
+  <tr>
+    <td valign="top"><%= f.label :desc, 'Krátký popis' %></td>
+    <td><%= f.text_area :desc %></td>
+  </tr>
+  <tr>
+    <td valign="top"><%= f.label :desc_long, 'Dlouhý popis' %></td>
+    <td><%= f.text_area :desc_long %></td>
+  </tr>
+  <tr>
+    <td valign="top"><%= f.label :gift, 'Dárek' %></td>
+    <td><%= f.text_area :gift %></td>
+  </tr>
+  <tr>
+    <td valign="top"><%= f.label :price, 'Cena tarifu' %></td>
+    <td><%= f.text_field :price %></td>
+  </tr>
+  <tr>
+    <td valign="top"><%= f.label :package_price, 'Cena balíčku s telefonem' %></td>
+    <td><%= f.text_field :package_price %></td>
+  </tr>
+  <tr>
+    <td valign="top"><%= f.label :position, 'Pozice' %></td>
+    <td><%= f.text_field :position %></td>
+  </tr>
+</table>

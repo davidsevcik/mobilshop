@@ -1,0 +1,5 @@
+<% if url_options_authenticate?(:controller => 'admin/tariff_packages') %>
+  <li<%= ' class="active"' if current == "TariffPackages" %>>
+    <%= link_to 'Tarifní balíčky', admin_product_tariff_packages_url(@product) %>
+  </li>
+<% end %>

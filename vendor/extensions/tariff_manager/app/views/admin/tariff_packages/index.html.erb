@@ -1,0 +1,30 @@
+<%= render :partial => 'admin/shared/product_sub_menu' %>
+
+<%= render :partial => 'admin/shared/product_tabs', :locals => {:current => "TariffPackages"} %>
+
+<%= error_messages_for :tarrif_package %>
+
+<% form_tag(update_all_admin_product_tariff_packages_url) do %>
+  <table class="index">
+    <thead>
+      <tr>
+        <th>Balíček s tarifem</th>
+        <th>Cena</th>
+      </tr>
+    </thead>
+    <tbody id="tariff_packages">
+      <% @tariff_packages.each do |package| %>
+  		<tr>
+  		  <td><%= package.tariff.operator.name %>: <%= package.tariff.name %></td>
+          <td><%= text_field_tag "tariffs[#{package.tariff.id}][package_price]", package.price  %></td>
+  		</tr>
+      <% end %>
+  	</tbody>
+  </table>
+
+  <p class="form-buttons">
+    <%= button t("save") %>
+    <%= t("or") %> <%= link_to t("cancel"), admin_product_tariff_packages_url %>
+  </p>
+
+<% end %>
