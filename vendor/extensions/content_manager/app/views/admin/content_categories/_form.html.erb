@@ -6,10 +6,10 @@
 <% end %>
 
 
-<% f.field_container :sname do %>
-  <%= f.label :sname, 'Systémový název' %><br />
-  <%= f.text_field :sname, :class => 'fullwidth'  %>
-  <%= f.error_message_on :sname %>
+<% f.field_container :code do %>
+  <%= f.label :code, 'Systémový název' %> <em>(Pozor! Změna může ovlivnit funkčnost celého webu.)</em><br />
+  <%= f.text_field :code, :class => 'fullwidth'  %>
+  <%= f.error_message_on :code %>
 <% end %>
 
 

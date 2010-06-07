@@ -11,7 +11,7 @@ class ContentFrontendController < Spree::BaseController
       request.path
     end
 
-    unless @content = Content.find_by_slug(path)
+    unless @content = ContentNode.find_by_slug(path)
       render :file => "#{RAILS_ROOT}/public/404.html", :layout => false, :status => 404
     end
   end

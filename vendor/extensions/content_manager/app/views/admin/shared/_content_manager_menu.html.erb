@@ -1,0 +1,11 @@
+<% content_for :sidebar do %>
+
+  <ul class="sidebar">
+    <li<%= ' class="active"' if controller.controller_name == 'content_nodes' && params[:category].nil? %>><%= link_to 'Všechen obsah', admin_content_nodes_path %></li>    
+    <% @content_categories.each do |cat| %>
+      <li<%= ' class="active"' if controller.controller_name == 'content_nodes' && params[:category] == cat.id.to_s %>><%= link_to cat.name, admin_content_nodes_path(:category => cat.id) %></li>
+    <% end %>
+    <li<%= ' class="active"' if controller.controller_name == 'content_categories' %>><em><%= link_to 'Spravovat kategorie', admin_content_categories_path %></em></li>
+  </ul>
+
+<% end %>

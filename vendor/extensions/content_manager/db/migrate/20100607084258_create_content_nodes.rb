@@ -6,7 +6,7 @@ class CreateContentNodes < ActiveRecord::Migration
       t.string :slug
       t.integer :position
       t.integer :category_id
-      t.string :sname
+      t.string :code
       t.timestamps
     end
 

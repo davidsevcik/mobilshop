@@ -1,3 +1,6 @@
+<%= render :partial => 'admin/shared/content_manager_menu' %>
+
+
 <div class='toolbar'>
   <ul class='actions'>
     <li>
@@ -14,6 +17,7 @@
   <thead>
     <tr>
       <th>Název</th>
+      <th>Kategorie</th>
       <th></th>
     </tr>
   </thead>
@@ -21,6 +25,7 @@
     <% @content_nodes.each do |node| %>
       <tr>
         <td><%= h node.title %></td>
+        <td><%= h node.category.name %></td>
         <td>
           <%= link_to_edit node %> &nbsp;
           <%= link_to_delete node %>

@@ -2,7 +2,7 @@ class CreateContentCategories < ActiveRecord::Migration
   def self.up
     create_table :content_categories do |t|
       t.string :name
-      t.string :sname
+      t.string :code
       t.integer :position
 
       t.timestamps

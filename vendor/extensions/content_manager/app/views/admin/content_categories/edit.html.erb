@@ -1,7 +1,9 @@
-<%= error_messages_for :content %>
-<h1>Editace obsahu</h1>
+<%= render :partial => 'admin/shared/content_manager_menu' %>
 
-<% form_for(:content, :url => object_url, :html => { :method => :put }) do |f| %>
+<%= error_messages_for :content_category %>
+<h1>Editace kategorie</h1>
+
+<% form_for(:content_category, :url => object_url, :html => { :method => :put }) do |f| %>
   <%= render :partial => "form", :locals => { :f => f } %>
 
   <p class="form-buttons">

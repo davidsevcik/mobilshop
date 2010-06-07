@@ -20,3 +20,33 @@
 <% end %>
 
 
+<% f.field_container :category_id do %>
+  <%= f.label :category_id, 'Kategorie' %> <br />
+  <%= f.select :category_id, @content_categories.map {|cat| [cat.name, cat.id]}  %>
+  <%= f.error_message_on :code %>
+<% end %>
+
+
+<% f.field_container :code do %>
+  <%= f.label :code, 'Systémový název' %> <em>(Pozor! Změna může ovlivnit funkčnost celého webu.)</em><br />
+  <%= f.text_field :code, :class => 'fullwidth'  %>
+  <%= f.error_message_on :code %>
+<% end %>
+
+
+<fieldset>
+  <legend>Obrázky</legend>
+  <table>
+    <% @content_node.images.each do |img| %>
+      <tr>
+        <td><%= img.attachment_file_name %></td>
+        <td><%= check_box_tag "image_attributes[#{img.id}][destroy]" %> <%= label_tag "image_attributes[#{img.id}][destroy]", 'Smazat' %></td>  
+      </tr>
+    <% end %>
+
+    <tr>
+      <td colspan="2">Nahrát <%= file_field_tag 'image_attributes[new][attachment]' %></td>
+    </tr>
+  </table>
+</fieldset>
+

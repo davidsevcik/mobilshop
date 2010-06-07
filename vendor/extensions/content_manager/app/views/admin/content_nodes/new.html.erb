@@ -1,7 +1,10 @@
-<%= error_messages_for :content_node %>
-<h1>Nový obsah</h1>
+<%= render :partial => 'admin/shared/content_manager_menu' %>
 
-<% form_for(:content_node, :url => collection_url) do |f| %>
+
+<%= error_messages_for :content_node %>
+<h1>Nová kategorie</h1>
+
+<% form_for(:content_node, :url => collection_url, :html => {:multipart => true}) do |f| %>
   <%= render :partial => "form", :locals => { :f => f } %>
 
   <p class="form-buttons">

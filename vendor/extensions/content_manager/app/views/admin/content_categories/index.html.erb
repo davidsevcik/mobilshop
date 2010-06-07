@@ -1,3 +1,6 @@
+<%= render :partial => 'admin/shared/content_manager_menu' %>
+
+
 <div class='toolbar'>
   <ul class='actions'>
     <li>
@@ -20,7 +23,7 @@
   <tbody id="tariff_packages">
     <% @content_categories.each do |cat| %>
       <tr>
-        <td><%= h cat.title %></td>
+        <td><%= h cat.name %></td>
         <td>
           <%= link_to_edit cat %> &nbsp;
           <%= link_to_delete cat %>
