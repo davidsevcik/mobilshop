@@ -1,0 +1,10 @@
+<%= error_messages_for :content %>
+<h1>Editace obsahu</h1>
+
+<% form_for(:content, :url => object_url, :html => { :method => :put }) do |f| %>
+  <%= render :partial => "form", :locals => { :f => f } %>
+
+  <p class="form-buttons">
+    <%= button t("update") %> nebo <%= link_to t('cancel'), collection_url %>
+  </p>
+<% end %>

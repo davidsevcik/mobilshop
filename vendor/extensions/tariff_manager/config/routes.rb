@@ -6,4 +6,5 @@ map.namespace :admin do |admin|
   admin.resources :products do |product|
     product.resources :tariff_packages, :collection => {:update_all => :post}
   end
+  admin.resource :price_settings
 end

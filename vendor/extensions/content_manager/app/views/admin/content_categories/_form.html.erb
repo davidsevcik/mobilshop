@@ -1,0 +1,15 @@
+
+<% f.field_container :name do %>
+  <%= f.label :name, 'Název' %> <span class="required">*</span><br />
+  <%= f.text_field :name, :class => 'fullwidth title'  %>
+  <%= f.error_message_on :name %>
+<% end %>
+
+
+<% f.field_container :sname do %>
+  <%= f.label :sname, 'Systémový název' %><br />
+  <%= f.text_field :sname, :class => 'fullwidth'  %>
+  <%= f.error_message_on :sname %>
+<% end %>
+
+

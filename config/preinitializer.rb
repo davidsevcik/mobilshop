@@ -1,0 +1,1 @@
+ENSIONS_LOAD_ORDER = [:localization, :theme_default, :all, :tariff_manager, :product_loader, :site]

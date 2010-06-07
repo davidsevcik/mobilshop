@@ -1,0 +1,10 @@
+<%= error_messages_for :content %>
+<h1>Nový obsah</h1>
+
+<% form_for(:content, :url => collection_url) do |f| %>
+  <%= render :partial => "form", :locals => { :f => f } %>
+
+  <p class="form-buttons">
+    <%= button t("create") %> nebo <%= link_to t('cancel'), collection_url %>
+  </p>
+<% end %>

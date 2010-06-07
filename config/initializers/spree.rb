@@ -24,8 +24,6 @@ end
 # Initialize mail server settings
 Spree::Preferences::MailSettings.init
 
-Spree::Config.set(:allow_ssl_in_production => false)
-
 # Add extra support goodies (similar to rails active support)
 #class Array #:nodoc:
 #  include Spree::Support::CoreExtensions::Array

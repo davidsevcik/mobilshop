@@ -1,0 +1,31 @@
+<div class='toolbar'>
+  <ul class='actions'>
+    <li>
+      <p><%= button_link_to 'Nový obsah', new_object_url, :icon => 'add' %></p>
+    </li>
+  </ul>
+  <br class='clear' />
+</div>
+
+
+<h1>Statický obsah</h1>
+
+<table class="index">
+  <thead>
+    <tr>
+      <th>Název</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="tariff_packages">
+    <% @content_nodes.each do |node| %>
+      <tr>
+        <td><%= h node.title %></td>
+        <td>
+          <%= link_to_edit node %> &nbsp;
+          <%= link_to_delete node %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

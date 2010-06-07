@@ -1,0 +1,23 @@
+<%= render :partial => 'admin/shared/configuration_menu' %>
+
+<h1>Nastavení ceny</h1>
+
+<% form_tag(admin_price_settings_path, :method => :put) do %>
+  <p<%= !@errors[:price_formula].nil? ? ' class="withError"' : '' %>>
+    <%= label_tag(:price_formula, 'Vzorec pro výpočet ceny') %>
+	<%= text_field_tag(:price_formula, @price_formula, :size => 50) %>
+    <% unless @errors[:price_formula].nil? %>
+      <span class="formError"><%= @errors[:price_formula] %></span>
+    <% end %>
+  </p>
+
+  <p>
+    <%= check_box_tag :recount_all_prices %>
+    <%= label_tag :recount_all_price, 'Přepočítat ceny všech výrobků' %>
+  </p>
+
+  <p class="form-buttons">
+    <%= button t('update') %>
+    <%= t("or") %> <%= link_to t("cancel"), admin_price_settings_url %>
+  </p>
+<% end -%>

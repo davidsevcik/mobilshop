@@ -1,4 +1,4 @@
-class TariffManagerHooks < Spree::ThemeSupport::HookListener
+class ContentManagerHooks < Spree::ThemeSupport::HookListener
 
   #
   # In this file you can modify the content of the hooks available in the default templates
@@ -35,14 +35,13 @@ class TariffManagerHooks < Spree::ThemeSupport::HookListener
   #
   # adding a new tab to the admin navigation
   #
+  #   insert_after :admin_tabs do
+  #     tab(:taxonomies)
+  #   end
+  #
+
   insert_after :admin_tabs do
-    %(<%=  tab(:tariffs, :operators)  %>)
-  end
-
-  insert_after :admin_product_tabs, 'admin/shared/package_prices_tab'
-
-  insert_after :admin_configurations_sidebar_menu do
-    %(<li<%= ' class="active"' if controller.controller_name == 'price_settings' %>><%= link_to 'Nastavení ceny', admin_price_settings_path %></li>)
+    %(<%= tab(:content_nodes, :content_categories)  %>)
   end
 
 end

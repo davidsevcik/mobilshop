@@ -1,0 +1,22 @@
+
+<% f.field_container :title do %>
+  <%= f.label :title, 'Název' %> <span class="required">*</span><br />
+  <%= f.text_field :title, :class => 'fullwidth title'  %>
+  <%= f.error_message_on :title %>
+<% end %>
+
+
+<% f.field_container :slug do %>
+  <%= f.label :slug, 'Relativní adresa' %><br />
+  <%= f.text_field :slug, :class => 'fullwidth'  %>
+  <%= f.error_message_on :slug %>
+<% end %>
+
+
+<% f.field_container :body do %>
+  <%= f.label :body, 'Text' %><br />
+  <%= f.text_area :body, {:cols => 60, :rows => 8, :class => 'fullwidth'}  %>
+  <%= f.error_message_on :body %>
+<% end %>
+
+

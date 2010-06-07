@@ -1,0 +1,31 @@
+<div class='toolbar'>
+  <ul class='actions'>
+    <li>
+      <p><%= button_link_to 'Nová kategorie', new_object_url, :icon => 'add' %></p>
+    </li>
+  </ul>
+  <br class='clear' />
+</div>
+
+
+<h1>Kategorie obsahu</h1>
+
+<table class="index">
+  <thead>
+    <tr>
+      <th>Název</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="tariff_packages">
+    <% @content_categories.each do |cat| %>
+      <tr>
+        <td><%= h cat.title %></td>
+        <td>
+          <%= link_to_edit cat %> &nbsp;
+          <%= link_to_delete cat %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -24,6 +24,7 @@ namespace :spree do
         require 'net/http'
         require 'uri'
         require 'action_controller/test_process'
+        require 'price_calc'
 
         operator_taxonomy = Taxonomy.find_by_name('Operátor')
         category_to_taxon_map = {
@@ -53,7 +54,8 @@ namespace :spree do
                 product.description = item['Obsah_baleni']
                 product.available_on = Time.new.to_s
                 product.count_on_hand = item['Dostupnost']
-                product.price = item['Individualni_cena_zakaznika'].sub(',', '.')
+                product.cost_price = item['Individualni_cena_zakaznika'].sub(',', '.')
+                product.price = PriceCalc.from_cost_price(product.cost_price)
                 product.sku = item['EAN']
                 
                 if product.save

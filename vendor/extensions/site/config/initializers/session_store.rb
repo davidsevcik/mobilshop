@@ -5,8 +5,8 @@
 # Make sure the secret is at least 30 characters and all random, 
 # no regular words or you'll be exposed to dictionary attacks.
 ActionController::Base.session = {
-  :key         => '_mobilshop_session',
-  :secret      => '0d6863c67b4015565224f42174187c9857570d7cca5bd4e7cf9e61344257c71110a6d35868224f1f44f4db1a8a7d50a1fad476a1d6fe24fed954616178de061c'
+  :key         => '_restart_session',
+  :secret      => '06addcc33aaefa3365cef5533682a05de0b9156c1b4dea05429d97620ffa989be6fe4d41a3120246936538df832490fda7b235afeb19aa73ccd68bf014c0c340'
 }
 
 # Use the database for sessions instead of the cookie-based default,

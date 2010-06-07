@@ -1,8 +1,0 @@
----
-en-GB:
-  snippets: "Snippets"
-  snippets_desc: "Manage snippets with WYM editor."
-  snippets_slug: "Slug"
-  snippets_content: "Content"
-  new_snippet: "New snippet"
-  editing_snippet: "Editing snippet"
