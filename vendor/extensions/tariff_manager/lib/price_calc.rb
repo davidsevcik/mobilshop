@@ -1,7 +1,7 @@
 module PriceCalc
 
   def self.price_formula
-    Spree::Config[:price_formula]   
+    Spree::Config[:price_formula]
   end
 
   def self.price_formula=(formula)

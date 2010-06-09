@@ -3,10 +3,12 @@
 <%= error_messages_for :content_node %>
 <h1>Editace obsahu</h1>
 
-<% form_for(:content_node, :url => object_url, :html => { :method => :put, :multipart => true}) do |f| %>
+<% form_for(:content_node, :url => object_url, :html => { :method => :put, :multipart => true, :id => 'content-node-form'}) do |f| %>
   <%= render :partial => "form", :locals => { :f => f } %>
 
   <p class="form-buttons">
-    <%= button t("update") %> nebo <%= link_to t('cancel'), collection_url %>
+    <%= button 'Uložit' %> nebo
+    <%= button 'Uložit a pokračovat v editaci', nil, 'submit', :name => 'continue_editing', :value => '1' %> nebo 
+    <%= link_to t('cancel'), collection_url %>
   </p>
 <% end %>

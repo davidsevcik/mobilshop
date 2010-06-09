@@ -3,7 +3,7 @@ require 'price_calc'
 class Admin::PriceSettingsController < Admin::BaseController
 
   def show
-    @price_formula = Spree::Config[:price_formula]
+    @price_formula = PriceCalc.price_formula
     @errors = {}
   end
 

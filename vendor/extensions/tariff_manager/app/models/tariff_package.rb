@@ -5,7 +5,7 @@ class TariffPackage < ActiveRecord::Base
 
   def price
     if self[:price].blank?
-      tariff.eval_price(product.price)
+      tariff.eval_package_price(product.price)
     else
       self[:price]
     end

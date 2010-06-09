@@ -1,8 +1,17 @@
 <%= render :partial => 'admin/shared/tariff_manager_menu' %>
 
+<div class='toolbar'>
+  <ul class='actions'>
+    <li>
+      <p><%= button_link_to 'Nový tarif', new_object_url, :icon => 'add' %></p>
+    </li>
+  </ul>
+  <br class='clear' />
+</div>
+
 <h1>Tarify</h1>
 
-<table class="admin-report" width="545">
+<table class="index">
 	<thead>
 		<tr>
             <th>Operátor</th>
@@ -19,13 +28,11 @@
 			<td><%= tariff.name %></td>
             <td><%= tariff.price %></td>
 			<td>
-	          <%=link_to t("edit"), edit_object_url(tariff) %> |
-	          <%=link_to t("delete"), object_url(tariff), :method => :delete, :confirm=> 'Opravdu smazat?' %>
+	          <%= link_to_edit tariff %>  &nbsp;
+	          <%= link_to_delete tariff %>
 	        </td>
 		</tr>
 		<% end %>
 	</tbody>
 </table>
 
-
-<%= link_to 'Přidat tarif', new_object_url %>

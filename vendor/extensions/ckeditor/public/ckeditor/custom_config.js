@@ -19,7 +19,7 @@ CKEDITOR.addStylesSet( 'custom_styles',
 CKEDITOR.editorConfig = function( config )
 {
 
-  config.startupMode = 'source';
+  //config.startupMode = 'source';
   
   config.toolbar_custom =
   [

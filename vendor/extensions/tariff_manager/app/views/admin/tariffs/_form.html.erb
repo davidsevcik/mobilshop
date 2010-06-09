@@ -1,34 +1,57 @@
-<table class="admin-tariff" width="545">
-  <tr>
-    <td valign="top"><%= f.label :operator_id, 'Operátor' %></td>
-    <td><%= f.select :operator_id, Operator.all.collect {|op| [op.name, op.id]} %></td>
-  </tr>
-  <tr>
-    <td valign="top"><%= f.label :name, 'Jméno' %></td>
-    <td><%= f.text_field :name %></td>
-  </tr>
-  <tr>
-    <td valign="top"><%= f.label :desc, 'Krátký popis' %></td>
-    <td><%= f.text_area :desc %></td>
-  </tr>
-  <tr>
-    <td valign="top"><%= f.label :desc_long, 'Dlouhý popis' %></td>
-    <td><%= f.text_area :desc_long %></td>
-  </tr>
-  <tr>
-    <td valign="top"><%= f.label :gift, 'Dárek' %></td>
-    <td><%= f.text_area :gift %></td>
-  </tr>
-  <tr>
-    <td valign="top"><%= f.label :price, 'Cena tarifu' %></td>
-    <td><%= f.text_field :price %></td>
-  </tr>
-  <tr>
-    <td valign="top"><%= f.label :package_price, 'Cena balíčku s telefonem' %></td>
-    <td><%= f.text_field :package_price %></td>
-  </tr>
-  <tr>
-    <td valign="top"><%= f.label :position, 'Pozice' %></td>
-    <td><%= f.text_field :position %></td>
-  </tr>
-</table>
+<% f.field_container :name do %>
+  <%= f.label :name, 'Název' %> <span class="required">*</span><br />
+  <%= f.text_field :name, :class => 'fullwidth title' %>
+  <%= f.error_message_on :name %>
+<% end %>
+
+<% f.field_container :operator_id do %>
+  <%= f.label :operator_id, 'Operátor' %><br />
+  <%= f.select :operator_id, Operator.all.collect {|op| [op.name, op.id]} %>
+<% end %>
+
+<% f.field_container :desc do %>
+  <%= f.label :desc, 'Krátký popis' %><br />
+  <%= f.text_area :desc, :class => 'fullwidth', :size => '80x6' %>
+<% end %>
+
+<% f.field_container :desc_long do %>
+  <%= f.label :desc_long, 'Dlouhý popis' %><br />
+  <%= f.text_area :desc_long, :class => 'fullwidth', :size => '80x12' %>
+<% end %>
+
+<% f.field_container :gift do %>
+  <%= f.label :gift, 'Dárek' %><br />
+  <%= f.text_area :gift, :class => 'fullwidth', :size => '80x6' %>
+<% end %>
+
+
+<% f.field_container :price do %>
+  <%= f.label :price, 'Cena tarifu' %> <span class="required">*</span><br />
+  <%= f.text_field :price, :size => 20 %>
+  <%= f.error_message_on :price %>
+<% end %>
+
+
+<% f.field_container :package_price do %>
+  <%= f.label :package_price, 'Výchozí cena balíčku s telefonem' %> <span class="required">*</span><br />
+  <%= f.text_field :package_price, :class => 'fullwidth' %><br />
+  <small>Proměnné: product_price, product_cost_price, tariff_price</small>
+  <%= f.error_message_on :package_price %>
+<% end %>
+
+
+<% f.field_container :position do %>
+  <%= f.label :position, 'Pozice' %><br />
+  <%= f.text_field :position, :size => 20 %>
+<% end %>
+
+<% f.field_container :published do %>
+  <%= f.check_box :published %> <%= f.label :published, 'Publikováno' %>
+<% end %>
+
+
+<% content_for :head do %>
+  <style type="text/css">
+    textarea { height: auto; }
+  </style>
+<% end %>

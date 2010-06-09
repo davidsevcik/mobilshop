@@ -34,19 +34,25 @@
 <% end %>
 
 
-<fieldset>
-  <legend>Obrázky</legend>
-  <table>
-    <% @content_node.images.each do |img| %>
-      <tr>
-        <td><%= img.attachment_file_name %></td>
-        <td><%= check_box_tag "image_attributes[#{img.id}][destroy]" %> <%= label_tag "image_attributes[#{img.id}][destroy]", 'Smazat' %></td>  
-      </tr>
-    <% end %>
 
-    <tr>
-      <td colspan="2">Nahrát <%= file_field_tag 'image_attributes[new][attachment]' %></td>
-    </tr>
-  </table>
-</fieldset>
+<% content_for :head do %>
+  <%= javascript_include_tag '/ckeditor/ckeditor.js' %>
+
+  <script type="text/javascript">
+  $(function() {
+    CKEDITOR.replace('content_node_body',
+      {
+        customConfig: '<%= javascript_path('/ckeditor/custom_config.js') %>',
+        height: 350,
+        filebrowserBrowseUrl : '<%= url_for(:action => 'image_browser', :id => @content_node) %>',
+        filebrowserWindowWidth : '800',
+        filebrowserWindowHeight : '600'
+      });
+  });
+  </script>
+<% end %>
+
+
+
+
 

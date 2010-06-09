@@ -4,10 +4,12 @@
 
 <% form_tag(admin_price_settings_path, :method => :put) do %>
   <p<%= !@errors[:price_formula].nil? ? ' class="withError"' : '' %>>
-    <%= label_tag(:price_formula, 'Vzorec pro výpočet ceny') %>
-	<%= text_field_tag(:price_formula, @price_formula, :size => 50) %>
+    <%= label_tag(:price_formula, 'Vzorec pro výpočet ceny produktu') %><br />
+	<%= text_field_tag(:price_formula, @price_formula, :class => 'fullwidth') %><br />
+    <small>Např.: (((cost_price*1.2+1)*1.2)/10).ceil*10</small>
+    
     <% unless @errors[:price_formula].nil? %>
-      <span class="formError"><%= @errors[:price_formula] %></span>
+      <div class="formError"><%= @errors[:price_formula] %></div>
     <% end %>
   </p>
 

@@ -1,0 +1,33 @@
+<fieldset>
+  <legend>Obrázky</legend>
+  <div>
+    <% @content_node.images.each do |img| %>
+      <div class="image-wrap">
+        <%= image_tag img.attachment.url(:small) %><br />
+        <%= img.attachment_file_name %><br />
+        <%= link_to_remote 'Smazat', :url => {:action => 'destroy_image', :id => @content_node.id, :image_id => img.id},
+                           :method => 'delete', :before => '$(this).closest(".image-wrap").remove()' %>
+      </div>
+    <% end %>
+
+    <p class="upload-wrap">
+      Nahrát
+      <input type="file" name="uploaded_images[][attachment]" class="uploaded_images" size="50" onchange="add_file_field(this)" />
+      <a href="javascript:void(0)" onclick="remove_unsaved_image(this)" style="display:none">Smazat</a>
+    </p>
+  </div>
+
+  <script type="text/javascript">
+    function add_file_field(file_tag) {
+      var tr = $(file_tag).closest('.upload-wrap');
+      if (tr.next('.upload-wrap').length == 0) {
+        tr.after(tr.clone()).next('.upload-wrap').find('input').val('');
+        tr.find('a').show();
+      }
+    }
+
+    function remove_unsaved_image(link_tag) {
+      $(link_tag).closest('.upload-wrap').remove();
+    }
+  </script>
+</fieldset>

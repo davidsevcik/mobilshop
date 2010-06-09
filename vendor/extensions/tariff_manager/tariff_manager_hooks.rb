@@ -45,4 +45,13 @@ class TariffManagerHooks < Spree::ThemeSupport::HookListener
     %(<li<%= ' class="active"' if controller.controller_name == 'price_settings' %>><%= link_to 'Nastavení ceny', admin_price_settings_path %></li>)
   end
 
+  insert_after :admin_configurations_menu do
+    %(
+      <tr>
+        <td><%= link_to 'Nastavení ceny, admin_price_settings_path %></td>
+        <td>Nastavení výpočtu ceny</td>
+      </tr>
+    )
+  end
+
 end

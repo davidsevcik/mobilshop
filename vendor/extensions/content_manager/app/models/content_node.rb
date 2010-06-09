@@ -6,4 +6,6 @@ class ContentNode < ActiveRecord::Base
   accepts_nested_attributes_for :images, :allow_destroy => true
 
   validates_presence_of :title, :category_id
+
+
 end
