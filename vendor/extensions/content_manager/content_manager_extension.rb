@@ -32,7 +32,7 @@ class ContentManagerExtension < Spree::Extension
 
         slug = request.path.ends_with?('/') ? request.path[1..-2] : request.path[1..-1]
 
-        return if Rails.cache.fetch('page_not_exist/'+slug)
+        return if slug.blank? || Rails.cache.fetch('page_not_exist/'+slug)
 
         if @content_node = ContentNode.find_by_slug(slug)
           render :template => 'content_frontend/show'

@@ -23,15 +23,15 @@ CKEDITOR.editorConfig = function( config )
   
   config.toolbar_custom =
   [
-      ['Format','Styles'],
-     	['Cut','Copy','Paste','PasteText','PasteWord'],
-     	['Undo','Redo','-','SelectAll','RemoveFormat'],
-     	['FontFormat','Style'],
-     	['Bold','Italic'],
-     	['NumberedList','BulletedList'],
-     	['Image','Table','SpecialChar'],
-     	['Link','Unlink','Anchor'],
-     	['FitWindow','ShowBlocks','Source'],
+    ['Format','Styles'],
+    ['Cut','Copy','Paste','PasteText','PasteWord'],
+    ['Undo','Redo','-','SelectAll','RemoveFormat'],
+    ['FontFormat','Style'],
+    ['Bold','Italic'],
+    ['NumberedList','BulletedList'],
+    ['Image','Table','SpecialChar'],
+    ['Link','Unlink','Anchor'],
+    ['FitWindow','ShowBlocks','Source']
   ];
 
   config.toolbar = 'custom';
@@ -39,4 +39,5 @@ CKEDITOR.editorConfig = function( config )
   config.stylesCombo_stylesSet = 'custom_styles';
   config.format_tags = 'h2;h3;h4;p';
 
+  config.entities = false;
 };

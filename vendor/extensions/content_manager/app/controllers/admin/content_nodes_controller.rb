@@ -41,7 +41,7 @@ class Admin::ContentNodesController < Admin::BaseController
 
 
   def image_browser
-    @content_node = ContentNode.find(params[:id])
+    @content_node = params[:id].nil? ? ContentNode.new : ContentNode.find(params[:id])
     render :layout => false
   end
 
@@ -50,6 +50,15 @@ class Admin::ContentNodesController < Admin::BaseController
 
   def load_data
     @content_categories = ContentCategory.all
+  end
+
+  def build_object
+    if params[:content_node]
+      @object = ContentNode.new(params[:content_node])
+    else
+      @object = ContentNode.new
+      @object.category_id = params[:category] unless params[:category].blank?
+    end  
   end
 
 end

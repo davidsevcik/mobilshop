@@ -1,0 +1,70 @@
+<h1>Kontaktní údaje</h1>
+
+<%= error_messages_for :order_info %>
+
+<% form_for(@order_info, :url => {:action => 'contact_process'}) do |f| %>
+
+  <p>
+    <%= f.label :name, 'Jméno' %> <span class="required">*</span><br />
+    <%= f.text_field :name %>
+    <%= f.error_message_on :name %>
+  </p>
+  
+  <p>
+    <%= f.label :surname, 'Příjmení' %> <span class="required">*</span><br />
+    <%= f.text_field :surname %>
+    <%= f.error_message_on :surname %>
+  </p>
+
+  <p>
+    <%= f.label :phone, 'Kontaktní telefon' %> <span class="required">*</span><br />
+    <%= f.text_field :phone %>
+    <%= f.error_message_on :phone %>
+  </p>
+
+  <p>
+    <%= f.check_box :number_transfer %> <%= f.label :number_transfer, 'Žádám o převod telefonního čísla' %>
+  </p>
+  <br />
+
+
+  <p>
+    <%= f.label :company, 'Firma' %><br />
+    <%= f.text_field :company %>
+  </p>
+  <p>
+    <%= f.label :ic, 'IČ' %><br />
+    <%= f.text_field :ic %>
+  </p>
+  <p>
+    <%= f.label :dic, 'DIČ' %><br />
+    <%= f.text_field :dic %>
+  </p>
+  <br />
+
+  <p>
+    <%= f.label :street, 'Ulice a č.p.' %> <span class="required">*</span><br />
+    <%= f.text_field :street %>
+    <%= f.error_message_on :street %>
+  </p>
+  <p>
+    <%= f.label :city, 'Město' %> <span class="required">*</span><br />
+    <%= f.text_field :city %>
+    <%= f.error_message_on :city %>
+  </p>
+  <p>
+    <%= f.label :zip, 'PSČ' %> <span class="required">*</span><br />
+    <%= f.text_field :zip %>
+    <%= f.error_message_on :zip %>
+  </p>
+  <p>
+    <%= f.label :country, 'Stát' %> <span class="required">*</span><br />
+    <%= f.text_field :country %>
+    <%= f.error_message_on :country %>
+  </p>
+
+
+
+  <p><%= f.submit 'Pokračovat k dalšímu kroku' %></p>
+
+<% end %>

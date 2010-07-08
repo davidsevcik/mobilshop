@@ -1,0 +1,32 @@
+<%= @promo.try(:body) %>
+
+<div class="hr"> </div>
+
+<div id="tools">
+  <div class="hledej">
+    <% form_tag products_url, :method => :get do %>
+      <%= text_field_tag :keywords, params[:keywords] || "Zadejte hledaný výraz" %>
+      <input class="btn" type="submit" value="" />
+    <% end %>
+  </div>
+  <div class="zobrazit">
+    Řazení produktů:&nbsp;&nbsp;&nbsp;<a href="" class="updown">cena</a> <a href="" class="updown">název</a>
+  </div>
+</div>
+
+<div class="produkty">
+<% if @products %>
+  <% @products.each_with_index do |product, i| %>
+    <div class="produkt<%= i % 3 == 1 ? ' stred' : '' %>">
+      <%= link_to image_tag(product.images.first.attachment.url(:small), :alt => h(product.name)), product %>
+      <h2><%= link_to h(product.name), product %></h2>
+      <% prices = product.variants.map(&:price) %>
+      <%= number_to_currency(prices.min) %> - <%= number_to_currency(prices.max) %> Kč<br />
+      <a href="#" class="koupit"> </a>
+    </div>
+  <% end %>
+<% else %>
+  <p>Pro zobrazení na titulní stránce nebyly vybrány žádné produkty.</p>
+<% end %>
+</div>
+

@@ -1,13 +1,15 @@
 <%= render :partial => 'admin/shared/content_manager_menu' %>
 
+<h1>Nový obsah</h1>
 
 <%= error_messages_for :content_node %>
-<h1>Nový obsah</h1>
 
 <% form_for(:content_node, :url => collection_url, :html => {:multipart => true, :id => 'content-node-form'}) do |f| %>
   <%= render :partial => "form", :locals => { :f => f } %>
 
   <p class="form-buttons">
-    <%= button t("create") %> nebo <%= link_to t('cancel'), collection_url %>
+    <%= button 'Uložit' %> nebo
+    <%= button 'Uložit a pokračovat v editaci', nil, 'submit', :name => 'continue_editing', :value => '1' %> nebo
+    <%= link_to t('cancel'), collection_url %>
   </p>
 <% end %>

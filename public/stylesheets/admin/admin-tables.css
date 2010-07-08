@@ -6,12 +6,20 @@ table.index th {
   border-right: 1px solid #aaa;
   border-bottom: 1px solid #aaa;
   text-shadow: #efefef 1px 1px 0px; }
+  table.index th .right {
+    float:right;
+    font-weight:normal;
+  }
   table.index th.id-col {
     text-align: center; }
   table.index td {
     border-bottom:1px solid #ddd;
     padding: 3px 10px;
   }
+  table.index td.lbl-col {
+    width: 12%; }
+   table.index td.val-col {
+    width: 38%; }
 table.index tr.alt td {
   background-color: #efefef; }
 table.index.green th {

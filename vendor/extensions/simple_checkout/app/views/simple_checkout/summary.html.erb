@@ -1,0 +1,9 @@
+<h1>Shrnutí objednávky</h1>
+
+<h2>Order</h2>
+<%= debug @order %>
+
+<h2>Order info</h2>
+<%= debug @order.order_info %>
+
+<%= button_to 'Odeslat obejdnávku', :action => 'confirm' %>

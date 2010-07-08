@@ -1,0 +1,28 @@
+.menu li{
+background-image: expression(this.previousSibling==null ? 'none' : 'url(images/sidebar_cara.gif)');
+}
+.uvodni #sidebar #stin{
+	background:none;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/uvodni_sidebar_stin.png',sizingMethod='scale');
+}
+.uvodni  #content #side .stin{
+	background:none;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/uvodni_side_stin.png',sizingMethod='scale');
+}
+.produkt .tip{
+	background:none;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/buble_tip.png',sizingMethod='scale');
+}
+.produkt .akce{
+	background:none;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/buble_akce.png',sizingMethod='scale');
+}
+.produkt .darek{
+	background:none;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/buble_darek.png',sizingMethod='scale');
+}
+.produkt .darek, .produkt .akce, .produkt .tip{width:54px;height:65px;}
+.detail #sidebar #stin{
+	background:none;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/detail_sidebar_stin.png',sizingMethod='scale');
+}
+.detail #content #side .stin{
+	background:none;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/detail_side_stin.png',sizingMethod='scale');
+}
+.kosik #sidebar #stin{
+	background:none;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/kosik_sidebar_stin.png',sizingMethod='scale');
+}

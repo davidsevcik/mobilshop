@@ -1,7 +1,8 @@
 <%= render :partial => 'admin/shared/content_manager_menu' %>
 
-<%= error_messages_for :content_node %>
 <h1>Editace obsahu</h1>
+
+<%= error_messages_for :content_node %>
 
 <% form_for(:content_node, :url => object_url, :html => { :method => :put, :multipart => true, :id => 'content-node-form'}) do |f| %>
   <%= render :partial => "form", :locals => { :f => f } %>

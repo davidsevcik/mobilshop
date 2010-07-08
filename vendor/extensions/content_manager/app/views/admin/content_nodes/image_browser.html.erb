@@ -6,7 +6,7 @@
   <%= javascript_include_tag 'jquery' %>
   <style type="text/css">
     body { font-family:"Helvetica Neue",Helvetica,Tahoma,Verdana,Arial,sans-serif; font-size: .8em; }
-    .image-wrap { width: 100px; margin: 0 10px 20px 0; float: left; }
+    .image-wrap { height: 100px; margin: 0 10px 20px 0; float: left; }
     .delete { color: red; }
     #upload { clear: both; }
   </style>
@@ -31,17 +31,26 @@
 </head>
 <body>
 
-<% @content_node.images.each do |img| %>
-  <div class="image-wrap">
-  <%= image_tag img.attachment.url(:small) %><br />
-    <%= link_to_function 'Malý', 'return_image("' + img.attachment.url(:small) + '")' %><br />
-    <%= link_to_function 'Střední', 'return_image("' + img.attachment.url(:product) + '")' %><br />
-    <%= link_to_function 'Velký', 'return_image("' + img.attachment.url(:large) + '")' %><br />
-    <%= link_to_remote 'Smazat', {:url => {:action => 'destroy_image', :id => @content_node, :image_id => img.id},
-                        :method => 'delete',:before => '$(this).closest(".image-wrap").remove()'},
-                        { :class => 'delete' } %>
-  </div>
-<% end %>
+<% if @content_node.new_record? %>
+  <p>Před přidáváním obrázků je nutné příspěvek uložit.</p>
+<% else %>
+  <% @content_node.images.each do |img| %>
+    <table class="image-wrap">
+      <tr>
+        <td><%= image_tag img.attachment.url(:small) %></td>
+        <td>
+          <%= link_to_function 'Malý', 'return_image("' + img.attachment.url(:small) + '")' %><br />
+          <%= link_to_function 'Střední', 'return_image("' + img.attachment.url(:product) + '")' %><br />
+          <%= link_to_function 'Velký', 'return_image("' + img.attachment.url(:large) + '")' %><br />
+          <%= link_to_function 'Originál', 'return_image("' + img.attachment.url(:original) + '")' %><br />
+          <%= link_to_remote 'Smazat', {:url => {:action => 'destroy_image', :id => @content_node, :image_id => img.id},
+                              :method => 'delete',:before => '$(this).closest(".image-wrap").remove()'},
+                              { :class => 'delete' } %>
+        </td>
+      </tr>
+    </table>
+  <% end %>
+
 
 <% form_tag(url_for(:action => 'image_browser_upload', :id => @content_node, :CKEditorFuncNum => params[:CKEditorFuncNum]),
             :multipart => true, :id => 'content-node-form') do %>
@@ -54,6 +63,8 @@
 
     <%= submit_tag 'Nahrát' %>
   </fieldset>
+<% end %>
+
 <% end %>
 
 </body>

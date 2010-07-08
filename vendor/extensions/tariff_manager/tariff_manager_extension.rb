@@ -13,13 +13,7 @@ class TariffManagerExtension < Spree::Extension
   # end
   
   def activate
-    Product.class_eval do
-      has_many :tariff_packages
-
-      define_method :calc_price do
-        cost_price
-      end
-    end
+    Variant.additional_fields = []
 
 
     # make your helper avaliable in all views

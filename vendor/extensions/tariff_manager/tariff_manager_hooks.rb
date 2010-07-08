@@ -39,7 +39,7 @@ class TariffManagerHooks < Spree::ThemeSupport::HookListener
     %(<%=  tab(:tariffs, :operators)  %>)
   end
 
-  insert_after :admin_product_tabs, 'admin/shared/package_prices_tab'
+  #insert_after :admin_product_tabs, 'admin/shared/package_prices_tab'
 
   insert_after :admin_configurations_sidebar_menu do
     %(<li<%= ' class="active"' if controller.controller_name == 'price_settings' %>><%= link_to 'Nastavení ceny', admin_price_settings_path %></li>)
@@ -48,7 +48,7 @@ class TariffManagerHooks < Spree::ThemeSupport::HookListener
   insert_after :admin_configurations_menu do
     %(
       <tr>
-        <td><%= link_to 'Nastavení ceny, admin_price_settings_path %></td>
+        <td><%= link_to 'Nastavení ceny', admin_price_settings_path %></td>
         <td>Nastavení výpočtu ceny</td>
       </tr>
     )

@@ -32,85 +32,95 @@ namespace :spree do
           'Mobilní telefony - T-Mobile' => operator_taxonomy.taxons.find_by_name('T-Mobile'),
           'Mobilní telefony - O2' => operator_taxonomy.taxons.find_by_name('O2')
         }
-        vyrobce_taxonomy = Taxonomy.find_by_name('Výrobce')
+        primary_taxonomy = Taxonomy.find_by_name('Primární kategorie')
+        telefony_taxon = primary_taxonomy.taxons.find_by_name('Telefony')
 
         sample_file = File.join(File.dirname(__FILE__), '..', '..', 'test', 'mobilie.xml')
         puts sample_file
 
         reader = XML::Reader.file(sample_file, :options => XML::Parser::Options::NOBLANKS)
 
-        while reader.read
-          if reader.node_type == XML::Reader::TYPE_ELEMENT && reader.name == 'Shop_item'
-            item = Hash.from_xml(reader.read_outer_xml)
-            unless item.empty?
-              item = item['Shop_item']
-              
-              if category_to_taxon_map.include?(item['Kategorie_zbozi'])
+        begin
+          while reader.read
+            if reader.node_type == XML::Reader::TYPE_ELEMENT && reader.name == 'Shop_item'
+              item = Hash.from_xml(reader.read_outer_xml)
+              unless item.empty?
+                item = item['Shop_item']
 
-                product_vendor = ProductVendor.find_by_code(item['Cislo'])
-                product = product_vendor ? product_vendor.product : Product.new()
+                if category_to_taxon_map.include?(item['Kategorie_zbozi'])
 
-                product.name = item['Popis']
-                product.description = item['Obsah_baleni']
-                product.available_on = Time.new.to_s
-                product.count_on_hand = item['Dostupnost']
-                product.cost_price = item['Individualni_cena_zakaznika'].sub(',', '.')
-                product.price = PriceCalc.from_cost_price(product.cost_price)
-                product.sku = item['EAN']
-                
-                if product.save
-                  puts product.name
-                  log.info "INFO: Product #{product.name} saved"
+                  product_vendor = ProductVendor.find_by_code(item['Cislo'])
 
-                  product.taxons << category_to_taxon_map[item['Kategorie_zbozi']]
-                  product.product_vendors.create(:code => item['Cislo']) if product.product_vendors.empty?
+                  if product_vendor.nil?
+                    product = Product.new()
 
-                  if product.images.empty?
-                    uri = URI.parse(item['Obrazek'])
-                    resp = Net::HTTP.get_response(uri)
-                    if resp.code == '200'
-                      tmp = File.new("/tmp/#{item['Cislo']}_image", 'wb')
-                      tmp.write(resp.body)
-                      tmp.close
-                      product.images.create(:attachment => ActionController::TestUploadedFile.new(tmp.path, resp.content_type, true))
+                    product.name = item['Popis']
+                    product.description = item['Obsah_baleni']
+                    product.available_on = Time.new.to_s
+                    product.count_on_hand = item['Dostupnost']
+                    product.cost_price = item['Individualni_cena_zakaznika'].sub(',', '.')
+                    product.price = PriceCalc.from_cost_price(product.cost_price)
+                    product.sku = item['EAN'] || ''
 
-                      File.delete(tmp.path)
-                    end
-                  end
+                    if product.save
+                      puts product.name, " saved"
+                      log.info "INFO: Product #{product.name} saved"
 
-                  if !item['Vyrobce'].blank? && !product.taxons.exists?(:name => item['Vyrobce'])
-                    taxon = vyrobce_taxonomy.taxons.find_or_create_by_name(item['Vyrobce'])
-                    taxon.move_to_child_of(vyrobce_taxonomy.root) if taxon.parent_id.nil?
-                    product.taxons << taxon
-                  end
+                      product.taxons << category_to_taxon_map[item['Kategorie_zbozi']]
+                      product.product_vendors.find_or_create_by_code(item['Cislo'])
 
+                      if !item['Obrazek'].blank?
+                        uri = URI.parse(item['Obrazek'])
+                        resp = Net::HTTP.get_response(uri)
+                        if resp.code == '200'
+                          tmp = File.new("/tmp/#{item['Cislo']}_image.gif", 'wb')
+                          tmp.write(resp.body)
+                          tmp.close
+                          product.images.create(:attachment => ActionController::TestUploadedFile.new(tmp.path, resp.content_type, true))
 
-                  unless item['Technicke_parametry'].blank?
-                    item['Technicke_parametry']['Technicky_parametr'].each do |param|
-                      if param.include?('Name') && param.include?('Value') && !param['Name'].blank? && !param['Value'].blank?
-                        puts param['Name'] + ': ' + param['Value']
-                        property = Property.find_or_create_by_name_and_presentation(param['Name'].downcase, param['Name'])
-                        unless product.product_properties.exists?(:property_id => property.id)
-                          product.product_properties.create(:property_id => property.id, :value => param['Value'])
+                          File.delete(tmp.path)
                         end
                       end
+
+                      if !item['Vyrobce'].blank?
+                        taxon = Taxon.find_or_create_by_taxonomy_id_and_parent_id_and_name(primary_taxonomy.id, telefony_taxon.id, item['Vyrobce'])
+                        product.taxons << taxon
+                      end
+
+
+                      unless item['Technicke_parametry'].blank?
+                        item['Technicke_parametry']['Technicky_parametr'].each do |param|
+                          if param.include?('Name') && param.include?('Value') && !param['Name'].blank? && !param['Value'].blank?
+                            #puts param['Name'] + ': ' + param['Value']
+                            property = Property.find_or_create_by_name_and_presentation(param['Name'].downcase, param['Name'])
+                            unless product.product_properties.exists?(:property_id => property.id)
+                              product.product_properties.create(:property_id => property.id, :value => param['Value'])
+                            end
+                          end
+                        end
+                      end
+
+                    else
+                      log.error "ERROR: #{product.errors.inspect}"
+                      p product.errors
                     end
+
+                  else  # produkt uz je v db
+                    product = product_vendor.product
+                    product.count_on_hand = item['Dostupnost']
+                    product.cost_price = item['Individualni_cena_zakaznika'].sub(',', '.')
+                    product.price = PriceCalc.from_cost_price(product.cost_price)
+                    product.save
+                    puts product.name, " updated"
                   end
-                  
-                else
-                  log.error "ERROR: #{product.errors.inspect}"
-                  p product.errors
                 end
-
-
-                #puts product
               end
             end
           end
+        ensure
+          reader.close
+          Taxon.rebuild!
         end
-
-        reader.close
-
       end
     end
   end

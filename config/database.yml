@@ -33,7 +33,7 @@ test:
 
 production:
   adapter: mysql
-  database: mobilshop
+  database: mobilshop_dev
   username: root
   password: root
   host: localhost

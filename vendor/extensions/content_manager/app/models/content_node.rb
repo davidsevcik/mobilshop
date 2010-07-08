@@ -8,4 +8,8 @@ class ContentNode < ActiveRecord::Base
   validates_presence_of :title, :category_id
 
 
+  def path
+    "/#{slug}"
+  end
+
 end
