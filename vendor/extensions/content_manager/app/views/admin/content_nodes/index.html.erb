@@ -23,7 +23,7 @@
   </thead>
   <tbody id="tariff_packages">
     <% @content_nodes.each do |node| %>
-      <tr>
+      <tr id="<%= dom_id node %>">
         <td><%= h node.title %></td>
         <td><%= h node.category.name %></td>
         <td>

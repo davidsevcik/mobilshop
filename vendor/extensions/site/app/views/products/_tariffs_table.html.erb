@@ -1,0 +1,43 @@
+<table cellspacing="0" cellpadding="0" id="<%= local_assigns[:dom_id] %>"<%= local_assigns[:hide] ? ' style="display:none"' : '' %>>
+  <tr class="head">
+    <td width="120">Popis</td>
+    <td width="175">Dostanete</td>
+    <td width="68">Měsíčně</td>
+    <td width="135">Dárek</td>
+    <td width="80">Cena</td>
+  </tr>
+  <% variants.each do |variant| %>
+    <%
+      tariff = variant.tariff
+      continue unless tariff.published?
+    %>
+    <tr>
+      <td class="popis">
+        <img src="/images/ico_<%= h tariff.operator.name.downcase %>.jpg" alt="<%= h tariff.operator.name %>" /><br />
+        <%= h tariff.name %>
+      </td>
+      <td class="dostanete">
+        <% if tariff.desc_long.empty? %>
+          <%= h tariff.desc %>
+        <% else %>
+          <a href="#tariff_<%= tariff.id %>_desc"><%= h tariff.desc %> <img src="/images/kosik_arr.png" /></a>
+          <div style="display:none"><div id="tariff_<%= tariff.id %>_desc" style="width:500px">
+            <%= textilize(tariff.desc_long) %>
+          </div></div>
+        <% end %>
+      </td>
+      <td><%= number_to_currency(tariff.price) %></td>
+      <td class="darek"><%= h tariff['gift'] %></td>
+      <td class="cena">
+        <%= variant.price == 0 ? 'ZDARMA' : number_to_currency(variant.price) %><br />
+        <% form_for :order, :url => orders_url do |f| %>
+          <%= hidden_field_tag "products[#{@product.id}]", variant.id %>
+          <%= hidden_field_tag :quantity, 1 %>
+          <button type='submit' class="buy-button">
+            <%= image_tag('/images/koupit.png') %>
+          </button>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>

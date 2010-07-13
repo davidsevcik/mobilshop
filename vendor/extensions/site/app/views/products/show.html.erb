@@ -1,0 +1,94 @@
+<% render :layout => 'shared/main_layout' do %>
+
+  <div id="zalozky">
+    <div class="middle"><div class="left"> </div><div class="right">
+      <a href="#product-description">POPIS</a> | <a href="#product-properties">PARAMETRY</a> | <a href="#product-package-content">OBSAH BALENÍ </a>
+    </div></div>
+  </div>
+
+  <div id="nahled">
+    <%= product_image(@product) %>
+
+    <% if @product.images.size > 1 %>
+      <div id="scrol">
+        <a href="#" class="left"> </a>
+        <div class="middle">
+          <div id="in" style="width:200px">
+            <% product.images.each do |i| %>
+              <%= link_to(image_tag(i.attachment.url(:mini)), i.attachment.url(:product)) %>
+            <% end %>
+          </div>
+        </div>
+        <a href="#" class="right"> </a>
+      </div>
+    <% end %>
+  </div>
+
+  <div id="popis">
+    <h1 class="title"><%= h @product.name %></h1>
+    <div id="product-description">
+      <%= textilize(@product) rescue t("product_has_no_description") %>
+
+      <div class="stav first"><a href="" class="true">skladem</a></div>
+      <div class="stav"><a href="" class="true">neblokováno</a></div>
+      <div class="stav"><a href="" class="true">určeno pro český trh</a></div>
+    </div>
+
+    <div id="product-properties" style="display:none">
+    <% unless @product_properties.empty? %>
+      <table>
+      <% for product_property in @product_properties %>
+        <%
+          if product_property.property_id == Spree::Config[:package_content_property_id]
+            @package_content = product_property
+            continue
+          end
+        %>
+        <tr>
+          <th><%= product_property.property.presentation %></th>
+          <td><%= product_property.value %></td>
+        </tr>
+      <% end %>
+      </table>
+    <% end %>
+    </div>
+
+    <div id="product-package-content" style="display:none">
+      <p><%= @package_content.try(:value) %></p>
+    </div>
+  </div>
+
+  <div class="hr"> </div>
+  <div id="nabidky">
+    <div class="header">
+      <a href="#best-tariffs"><img src="/images/nabidky_nadpis.png" alt="Nejlepší nabídky" /></a>
+      <a href="#o2-tariffs"><img src="/images/nabidky_o2.jpg" alt="O2" /></a>
+      <a href="#tmobile-tariffs"><img src="/images/nabidky_tmobile.jpg" alt="T-Mobile" /></a>
+      <!--<a href="#vodafone-tariffs"><img src="/images/nabidky_vodafone.jpg" alt="Vodafone" /></a> -->
+    </div>
+
+    <%= render 'tariffs_table', :variants => @product.variants, :dom_id => 'best-tariffs'  %>
+    <%= render 'tariffs_table', :variants => @product.variants.select {|t| t.tariff.operator.name == 'O2' }, :dom_id => 'o2-tariffs', :hide => true  %>
+    <%= render 'tariffs_table', :variants => @product.variants.select {|t| t.tariff.operator.name == 'T-Mobile' }, :dom_id => 'tmobile-tariffs', :hide => true  %>
+  </div>
+
+
+  <script type="text/javascript">
+  jQuery(function($) {
+    $('#zalozky a').click(function() {
+      $('#product-description, #product-properties, #product-package-content').hide();
+      $($(this).attr('href')).show();
+      return false;
+    });
+
+    $('#nabidky .header a').click(function() {
+      $('#best-tariffs, #o2-tariffs, #tmobile-tariffs, #vodafone-tariffs').hide();
+      $($(this).attr('href')).show();
+      return false;
+    });
+
+    $(".dostanete a").fancybox();
+  });
+  </script>
+
+<% end %>

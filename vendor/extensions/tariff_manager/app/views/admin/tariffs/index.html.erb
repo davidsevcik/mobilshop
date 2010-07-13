@@ -23,7 +23,7 @@
 	
 	<tbody>
     	<% @tariffs.each do |tariff| %>
-		<tr class="<%= cycle('even', 'odd') %>">
+		<tr id="<%= dom_id tariff %>">
 			<td><%= tariff.operator.name %></td>
 			<td><%= tariff.name %></td>
             <td><%= tariff.price %></td>

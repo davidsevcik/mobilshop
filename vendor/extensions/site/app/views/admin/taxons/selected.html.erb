@@ -6,7 +6,7 @@
 </div>
 
 <script type="text/javascript">
-  function add_selected_taxon(taxonomy_id) {
+  function add_selected_taxon(taxonomy_id, permalink) {
     var taxonomy_dom_id = '#taxonomy_' + taxonomy_id;
     jQuery.ajax({
       beforeSend:function(request) {
@@ -20,7 +20,7 @@
         jQuery('#selected-taxons').html(request);
       },
       type:'post',
-      url:'/admin/products/htc-touch-diamond-ii-cz/taxons/'+jQuery(taxonomy_dom_id+' select').val()+'/select'
+      url:'/admin/products/'+permalink+'/taxons/'+jQuery(taxonomy_dom_id+' select').val()+'/select'
     });
 
     return false;
@@ -39,7 +39,7 @@
       %>
       <td style="vertical-align:middle">
         <%= select_tag :taxon, options_for_select(taxon_select) %> &nbsp;
-        <a onclick="add_selected_taxon(<%= taxonomy.id %>)" href="#" class="iconlink"><img src="/images/admin/icons/add.png" alt="<%= t :add %>"> <%= t :add %></a>
+        <a onclick="add_selected_taxon('<%= taxonomy.id %>', '<%= @product.permalink %>')" href="#" class="iconlink"><img src="/images/admin/icons/add.png" alt="<%= t :add %>"> <%= t :add %></a>
         <%= image_tag "spinner.gif", :style => "display:none", :id => "taxonomy_#{taxonomy.id}_spinner" %>
       </td>
     </tr>

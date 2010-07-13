@@ -1,0 +1,56 @@
+<% @body_class = 'kosik' %>
+
+
+<div class="kosik">
+  <div class="stin"> </div>
+  <div id="prubeh">
+    <div class="in step1"><div> </div></div>
+    <div class="step2"><div> </div></div>
+    <div class="step3"><div> </div></div>
+  </div>
+
+  <div id="obsah">
+    <% form_for(@order, :url => object_url, :html => { :method => :put, :id => 'updatecart' }) do |order_form| %>
+
+      <%= error_messages_for :order  %>
+
+      <div class="header"><img src="/images/kosik_nadpis.jpg" /></div>
+
+      <table cellspacing="0" cellpadding="0" class="basket-table">
+        <tr class="head">
+          <td width="73" class="left">Produkt</td>
+          <td width="361"> </td>
+          <td width="97">Cena za ks</td>
+          <td width="60">ks</td>
+          <td width="108">Cena celkem</td>
+          <td></td>
+        </tr>
+        <% order_form.fields_for :line_items do |item_form| %>
+          <%= render 'line_item', :variant => item_form.object.variant, :line_item => item_form.object, :item_form => item_form %>
+        <% end %>
+
+        <% if @order.line_items.empty? -%>
+          <tr id="none">
+            <td colspan="6"><%= t("your_cart_is_empty.") -%></td>
+          </tr>
+        <% else %>
+          <tr class="dohromady">
+            <td colspan="4">Cena nákupu</td>
+            <td class="cena"><%= order_price(@order) %></td>
+          </tr>
+        <% end %>
+
+      </table>
+
+      <% unless @order.line_items.empty? %>
+        <div id="tlacitka">
+          <%= link_to 'Pokračovat v nákupu', products_path, :style => 'float:left' %>
+          <%= link_to 'Objednat', simple_checkout_url(@order.number), :class => 'btn objednat' %>
+          <%= link_to 'Přepočítat', '#', :class => 'btn vysypat', :onclick => "$('form#updatecart').submit(); return false;" %>
+          <%= link_to 'Vysypat košík', object_url, :method => :delete, :class => 'btn vysypat'  %>
+        </div>
+      <% end %>
+
+    <% end %>
+  </div>
+</div><!-- .kosik -->

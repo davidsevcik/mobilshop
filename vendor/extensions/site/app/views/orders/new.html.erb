@@ -1,0 +1,43 @@
+<% @body_class = 'kosik' %>
+
+<div class="kosik">
+  <%= render 'shared/flashes' %>
+
+  <div class="stin"> </div>
+  <div id="prubeh">
+    <div class="in step1"><div> </div></div>
+    <div class="step2"><div> </div></div>
+    <div class="step3"><div> </div></div>
+  </div>
+
+  <div id="obsah">
+    <% form_for(@order, :url => object_url, :html => { :method => :put}) do |order_form| %>
+      <%= error_messages_for :order  %>
+
+      <div class="header"><img src="/images/kosik_nadpis.jpg" /></div>
+
+      <table cellspacing="0" cellpadding="0">
+        <tr class="head">
+          <td width="73" class="left">Produkt</td>
+          <td width="361"> </td>
+          <td width="97">Cena za ks</td>
+          <td width="60">ks</td>
+          <td width="108">Cena celkem</td>
+          <td></td>
+        </tr>
+        <% order_form.fields_for :line_items do |item_form| %>
+          <%= render 'line_item', :variant => item_form.object.variant, :line_item => item_form.object, :item_form => item_form %>
+        <% end %>
+
+        <% if @order.line_items.empty? -%>
+          <tr id="none">
+            <td colspan="6"><%= t("your_cart_is_empty.") -%></td>
+          </tr>
+        <% end -%>
+
+      </table>      
+    <% end %>
+  </div>
+
+  <p><%=link_to t("continue_shopping"), products_path %></p>
+</div><!-- .kosik -->

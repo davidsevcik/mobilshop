@@ -78,7 +78,7 @@ cs-CZ:
         description: Popis
         master_price: "Základní cena"
         name: "Název"
-        on_hand: "Dostupný"
+        on_hand: "Na skladě"
         shipping_category: "Kategorie dopravy"
         tax_category: "Daňová kategorie"
       product_group:
@@ -922,3 +922,4 @@ cs-CZ:
   zone_based: "Založeno na zóně"
   zone_setting_description: "Soubor zemí, států a jiných zón, které budou použity v různých výpočtech."
   zones: "Zóny"
+  guest_checkout: 'Nezaregistrovaný'

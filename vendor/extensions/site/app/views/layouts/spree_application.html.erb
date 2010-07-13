@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<% hook :inside_head do %>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  <title><%= title %></title>
+  <%= stylesheet_tags %>
+  <%= stylesheet_link_tag 'jquery.fancybox-1.3.1.css' %>
+  <%= javascript_include_tag 'jquery-1.3.2.min', 'jquery.validate.min.js', :cache => 'jquery-core' %>
+  <%= javascript_include_tag 'localization/messages_cs.js', 'jquery.mousewheel-3.0.2.pack.js', 'jquery.fancybox-1.3.1.pack.js' %>
+  <%= meta_data_tags %>
+  <%= yield :head %>
+  <!--[if IE 6]>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/ie6.css" />
+  <![endif]-->
+<% end %>
+</head>
+
+<body class="<%= @body_class || 'detail' %>">
+  <div id="header">
+    <% h_level = controller.controller_name == 'homepage' ? '1' : '2' %>
+    <%= content_tag "h#{h_level}", link_to('Dotované telefony', '/'), :id => 'site-logo' %> 
+
+    <div id="kosik">
+      &nbsp;&nbsp;&nbsp; <%= site_link_to_cart %>
+    </div>
+    <ul>
+      <li><a href="/ochodni-podminky">Obchodní podmínky</a></li>
+      <li><a href="/vyhody-nakupu">Výhody nákupu</a></li>
+      <li><a href="/kontakt">Kontakt</a></li>
+    </ul>
+  </div> <!-- header -->
+	<div id="body">
+      <div id="content">
+        <%= yield %>
+      </div>
+
+      <div id="sidebar">
+          <div id="stin"><div> </div></div>
+          <div id="tri">
+              <a href="http://www.o2.cz/" class="o2"> </a>
+              <a href="http://www.t-mobile.cz/" class="tmobile"> </a>
+              <a href="http://www.vodafone.cz/" class="vodafone"> </a>
+          </div>
+          <ul class="menu" id="znacky">
+            <% taxons = Taxon.find_by_permalink('primarni-kategorie/telefony/').children.all(:order => 'name') %>
+            <% taxons.each do |taxon| %>
+              <li<%= ' class="selected"' if (@taxon == taxon) %>><%= link_to taxon.name, seo_url(taxon) %></li>
+            <% end %>
+          </ul>
+          <div class="nadpis"><span>Konstrukce</span></div>
+          <ul class="menu">
+              <li><a href="#">Klasické</a></li>
+              <li><a href="#">Véčka</a></li>
+              <li><a href="#">Dotykové</a></li>
+              <li><a href="#">Výsuvné</a></li>
+              <li><a href="#">Otočné</a></li>
+          </ul>
+          <div class="nadpis"><span>Příslušenství</span></div>
+          <ul class="menu">
+              <li><a href="#">Handsfree</a></li>
+              <li><a href="#">Baterie</a></li>
+              <li><a href="#">Pouzdra</a></li>
+              <li><a href="#">Kryty</a></li>
+              <li><a href="#">Nabíječky</a></li>
+              <li><a href="#">Software</a></li>
+              <li><a href="#">Kabely</a></li>
+              <li><a href="#">Fólie</a></li>
+              <li><a href="#">Ostatní</a></li>
+          </ul>
+      </div><!-- #sidebar -->
+	<div id="body-bottom"> </div>
+  </div><!-- #body -->
+
+
+  <div id="footer">
+      <div id="red">
+          <p style="float:left;"><a href="http://www.dotovane-telefony.cz">dotovane-telefony.cz</a>&nbsp; |&nbsp; <a href="/kontakt/">kontakt</a>&nbsp; |&nbsp; <a href="/admin/">admin</a></p>
+          <p style="float:right;"><a href="/ostatni-eshopy/">ostatní e-shopy</a></p>
+      </div>
+      <div id="gray">
+          <p><strong>Dotovane telefony provozuje: </strong><br />Firma, s.r.o., Ulice 123, Brno 610 00</p>
+          <p><a href="#">Nokia</a>, <a href="#">Sony Ericsson</a>, <a href="#">Motorola</a>, <a href="#">Blackberry</a>, <a href="#">Samsung</a>, <a href="#">HTC</a>, <a href="#">Apple</a></p>
+      </div>
+  </div> <!-- #footer  -->
+
+  <%= render 'shared/google_analytics' %>
+</body>
+</html>

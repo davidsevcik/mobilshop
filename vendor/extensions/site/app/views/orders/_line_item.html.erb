@@ -1,0 +1,28 @@
+<tr>
+  <td class="nahled">
+    <%= item_form.hidden_field :variant_id %>
+    <%= item_form.hidden_field :order_id %>
+    <% if variant.images.length == 0 %>
+      <%= link_to mini_image(variant.product), product_path(variant.product) %>
+    <% else %>
+      <%= link_to image_tag(variant.images.first.attachment.url(:mini)), product_path(variant.product)   %>
+    <% end %>
+  </td>
+  <td class="popis">
+    <%
+      link_text  = variant.product.name + '<br />'
+      link_text += variant_options(variant)
+      link_text += (' + ' + variant.tariff.gift) if variant.tariff && !variant.tariff.gift.empty?
+      link_text += image_tag '/images/kosik_arr.png'
+    %>
+    <%= link_to link_text, product_path(variant.product) %>
+  </td>
+  <td><%= product_price(line_item) %></td>
+  <td><%= item_form.text_field :quantity, :size => 2 %></td>
+  <td class="cena">
+    <%= format_price(product_price(line_item, :format_as_currency => false) * line_item.quantity) unless line_item.quantity.nil? %>
+  </td>
+  <td>
+    <%= link_to(image_tag('/images/admin/icons/delete.png'), order_line_item_path(@order, line_item), :method => :delete) unless line_item.new_record? %>
+  </td>
+</tr>

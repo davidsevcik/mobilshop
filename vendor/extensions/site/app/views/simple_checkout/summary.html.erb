@@ -1,0 +1,117 @@
+<% @body_class = 'kosik' %>
+
+
+<div class="kosik">
+  <div class="stin"> </div>
+  <div id="prubeh">
+    <div class="step1"><div> </div></div>
+    <div class="step2"><div> </div></div>
+    <div class="in step3"><div> </div></div>
+  </div>
+
+  <div id="obsah">
+
+    <h2>Obsah objednávky</h2>
+    <table cellspacing="0" cellpadding="0" class="basket-table">
+      <tr class="head">
+        <td width="73" class="left">Produkt</td>
+        <td width="361"> </td>
+        <td width="97">Cena za ks</td>
+        <td width="60">ks</td>
+        <td width="108">Cena celkem</td>
+      </tr>
+      <% @order.line_items.each do |line_item| %>
+        <% variant = line_item.variant %>
+        <tr>
+          <td class="nahled">
+            <% if variant.images.length == 0 %>
+              <%= link_to mini_image(variant.product), product_path(variant.product) %>
+            <% else %>
+              <%= link_to image_tag(variant.images.first.attachment.url(:mini)), product_path(variant.product)   %>
+            <% end %>
+          </td>
+          <td class="popis">
+            <%
+              link_text  = variant.product.name + '<br />'
+              link_text += variant_options(variant)
+              link_text += (' + ' + variant.tariff.gift) if variant.tariff && !variant.tariff.gift.empty?
+              link_text += image_tag '/images/kosik_arr.png'
+            %>
+            <%= link_to link_text, product_path(variant.product) %>
+          </td>
+          <td><%= product_price(line_item) %></td>
+          <td><%= line_item.quantity %></td>
+          <td class="cena">
+            <%= format_price(product_price(line_item, :format_as_currency => false) * line_item.quantity) unless line_item.quantity.nil? %>
+          </td>
+        </tr>
+      <% end %>
+      <tr class="dohromady">
+        <td colspan="4">Cena nákupu</td>
+        <td class="cena"><%= order_price(@order) %></td>
+      </tr>
+    </table>
+
+
+    <h2>Kontaktní údaje</h2>
+
+    <table class="form-table">
+      <tr>
+        <th style="width:220px">Jméno</th>
+        <td><%= h @order.order_info.name %></td>
+      </tr>
+      <tr>
+        <th>Příjmení</th>
+        <td><%= h @order.order_info.surname %></td>
+      </tr>
+      <tr>
+        <th>Kontaktní telefon</th>
+        <td><%= h @order.order_info.phone %></td>
+      </tr>
+      <tr>
+        <th style="padding-bottom:20px">Žádám o převod telefonního čísla</th>
+        <td><%= @order.order_info.number_transfer? ? 'Ano' : 'Ne' %></td>
+      </tr>
+
+      <% unless @order.order_info.company.empty? %>
+        <tr>
+          <th>Firma</th>
+          <td><%= h @order.order_info.company %></td>
+        </tr>
+      <% end %>
+      <% unless @order.order_info.ic.empty? %>
+        <tr>
+          <th>IČ</th>
+          <td><%= h @order.order_info.ic %></td>
+        </tr>
+      <% end %>
+      <% unless @order.order_info.dic.empty? %>
+        <tr>
+          <th>DIČ</th>
+          <td style="padding-bottom:20px"><%= h @order.order_info.dic %></td>
+        </tr>
+      <% end %>
+
+      <tr>
+        <th>Ulice a č.p.</th>
+        <td><%= h @order.order_info.street %></td>
+      </tr>
+      <tr>
+        <th>Město</th>
+        <td><%= h @order.order_info.city %></td>
+      </tr>
+      <tr>
+        <th>PSČ</th>
+        <td><%= h @order.order_info.zip %></td>
+      </tr>
+      <tr>
+        <th>Stát</th>
+        <td><%= h @order.order_info.country %></td>
+      </tr>
+    </table>
+
+    <%= button_to 'Odeslat objednávku', :action => 'confirm', :html => {:class => 'submit float-right'} %>
+    <div class="clear"> </div>
+  </div>
+
+</div>

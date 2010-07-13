@@ -21,7 +21,7 @@
 	
 	<tbody>
     	<% @operators.each do |operator| %>
-		<tr class="<%= cycle('even', 'odd') %>">
+		<tr class="<%= cycle('even', 'odd') %>" id="<%= dom_id operator %>">
 			<td>
 				<%= operator.name %>
 			</td>

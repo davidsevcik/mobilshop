@@ -1,0 +1,9 @@
+<% render :layout => 'shared/main_layout' do %>
+  <div class="padded">
+    <h1>Přihlásit</h1>
+    <% hook :login do %>
+      <%= render :partial => 'shared/login' %>
+      <%= t("or") %> <%= link_to t("create_a_new_account"), signup_path %> | <%= link_to t("forgot_password"), new_password_reset_path %>
+    <% end %>
+  </div>
+<% end %>

@@ -8,9 +8,9 @@ class SiteExtension < Spree::Extension
 
   # Please use site/config/routes.rb instead for extension routes.
 
-  # def self.require_gems(config)
-  #   config.gem "gemname-goes-here", :version => '1.2.3'
-  # end
+  def self.require_gems(config)
+     config.gem "RedCloth"
+  end
   
   def activate
     # customize the checkout state machine
@@ -56,5 +56,17 @@ class SiteExtension < Spree::Extension
 #        I18n.locale = 'en'
 #      end
 #    end
+
+    Spree::BaseController.class_eval do
+      helper :site
+    end
+
+    ProductsController.class_eval do
+      helper :site
+      end
+
+    CheckoutsController.class_eval do
+      helper :site
+    end
   end
 end

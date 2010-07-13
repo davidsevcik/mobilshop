@@ -22,7 +22,7 @@
   </thead>
   <tbody id="tariff_packages">
     <% @content_categories.each do |cat| %>
-      <tr>
+      <tr id="<%= dom_id cat %>">
         <td><%= h cat.name %></td>
         <td>
           <%= link_to_edit cat %> &nbsp;

@@ -35,7 +35,7 @@
 <% f.field_container :package_price do %>
   <%= f.label :package_price, 'Výchozí cena balíčku s telefonem' %> <span class="required">*</span><br />
   <%= f.text_field :package_price, :class => 'fullwidth' %><br />
-  <small>Proměnné: product_price, product_cost_price, tariff_price</small>
+  <small>Proměnné: product_price, product_cost_price</small>
   <%= f.error_message_on :package_price %>
 <% end %>
 

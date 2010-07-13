@@ -17,8 +17,8 @@ namespace :spree do
       desc "Import changed products from source."
       task :load => :environment do
         timestamp = Time.now.strftime('%Y%m%d%H%M%S')
-        LOGFILE = File.join(RAILS_ROOT, 'log', "setos_import_#{RAILS_ENV}_#{timestamp}.log")
-        log = ActiveSupport::BufferedLogger.new(LOGFILE)
+        logfile = File.join(RAILS_ROOT, 'log', "setos_import_#{RAILS_ENV}_#{timestamp}.log")
+        log = ActiveSupport::BufferedLogger.new(logfile)
 
         require 'xml'
         require 'net/http'
@@ -55,12 +55,13 @@ namespace :spree do
                     product = Product.new()
 
                     product.name = item['Popis']
-                    product.description = item['Obsah_baleni']
+                    #product.description = item['Obsah_baleni']
                     product.available_on = Time.new.to_s
                     product.count_on_hand = item['Dostupnost']
                     product.cost_price = item['Individualni_cena_zakaznika'].sub(',', '.')
                     product.price = PriceCalc.from_cost_price(product.cost_price)
                     product.sku = item['EAN'] || ''
+                    product.is_tariffable = true
 
                     if product.save
                       puts product.name, " saved"
@@ -69,11 +70,13 @@ namespace :spree do
                       product.taxons << category_to_taxon_map[item['Kategorie_zbozi']]
                       product.product_vendors.find_or_create_by_code(item['Cislo'])
 
+
+                      #obrazek
                       if !item['Obrazek'].blank?
                         uri = URI.parse(item['Obrazek'])
                         resp = Net::HTTP.get_response(uri)
                         if resp.code == '200'
-                          tmp = File.new("/tmp/#{item['Cislo']}_image.gif", 'wb')
+                          tmp = File.new("/tmp/#{File.basename(uri.path)}", 'wb')
                           tmp.write(resp.body)
                           tmp.close
                           product.images.create(:attachment => ActionController::TestUploadedFile.new(tmp.path, resp.content_type, true))
@@ -82,23 +85,33 @@ namespace :spree do
                         end
                       end
 
+
+                      #vyrobce taxon
                       if !item['Vyrobce'].blank?
                         taxon = Taxon.find_or_create_by_taxonomy_id_and_parent_id_and_name(primary_taxonomy.id, telefony_taxon.id, item['Vyrobce'])
                         product.taxons << taxon
                       end
 
 
+                      #product parameters
                       unless item['Technicke_parametry'].blank?
                         item['Technicke_parametry']['Technicky_parametr'].each do |param|
                           if param.include?('Name') && param.include?('Value') && !param['Name'].blank? && !param['Value'].blank?
                             #puts param['Name'] + ': ' + param['Value']
-                            property = Property.find_or_create_by_name_and_presentation(param['Name'].downcase, param['Name'])
+                            property = Property.find_or_create_by_name_and_presentation(param['Name'], param['Name'])
                             unless product.product_properties.exists?(:property_id => property.id)
                               product.product_properties.create(:property_id => property.id, :value => param['Value'])
                             end
                           end
                         end
                       end
+
+                      property = Property.find_by_name('Obsah balení')
+                      property.product_properties.create(:product_id => product.id, :value => item['Obsah_baleni'])
+
+
+                      product.init_tariff_packages
+
 
                     else
                       log.error "ERROR: #{product.errors.inspect}"

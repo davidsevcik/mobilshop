@@ -1,0 +1,32 @@
+
+<div id="tools">
+  <div class="hledej">
+    <% form_tag products_url, :method => :get do %>
+      <%= text_field_tag :keywords, params[:keywords] || "Zadejte hledaný výraz" %>
+      <input class="btn" type="submit" value="" />
+    <% end %>
+  </div>
+  <div class="zobrazit">
+    Řazení produktů:&nbsp;&nbsp;&nbsp;<a href="" class="updown">cena</a> <a href="" class="updown">název</a>
+  </div>
+</div>
+
+<div class="produkty">
+<% if local_assigns[:products] %>
+  <% products.each_with_index do |product, i| %>
+    <div class="produkt<%= i%3 == 1 ? ' stred' : (i%3 == 0 ? ' new-line' : '') %>">
+      <%= link_to small_image(product), product %>
+      <h2><%= link_to h(product.name), product %></h2>
+      <% prices = (product.variants.map(&:price).reject {|p| p < 0 } + [product.price]).uniq %>
+      <% if prices.size == 1 -%>
+        <%= number_to_currency(prices.first, :precision => 0) %>
+      <% else -%>
+        <%= number_to_currency(prices.min, :unit => '') %> - <%= number_to_currency(prices.max) %>
+      <% end -%><br />
+      <%= link_to ' ', product, :class => 'koupit' %>
+    </div>
+  <% end %>
+<% else %>
+  <p>Omlouváme se, ale tato sekce neobsahuje v současnosti žádné produkty.</p>
+<% end %>
+</div>

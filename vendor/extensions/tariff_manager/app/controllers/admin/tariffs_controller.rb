@@ -17,4 +17,11 @@ class Admin::TariffsController < Admin::BaseController
     Rails.cache.delete('tariffs')
   end
 
+
+  private
+
+  def collection
+    @collection ||= end_of_association_chain.all(:include => :operator, :order => 'operator_id, name')
+  end
+
 end

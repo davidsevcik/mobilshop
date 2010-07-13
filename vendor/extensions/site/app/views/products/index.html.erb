@@ -1,0 +1,12 @@
+<% if params[:keywords] %>
+
+  <% hook :search_results do %>
+    <% if @products.empty? %>
+      <%= t(:no_products_found) %>
+    <% else %>
+      
+    <% end %>
+  <% end %>
+
+<% end %>
+

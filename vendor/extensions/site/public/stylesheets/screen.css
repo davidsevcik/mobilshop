@@ -1,0 +1,802 @@
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td { margin: 0; padding: 0; border: 0; outline: 0; font-weight: inherit; font-style: inherit; font-size: 100%; font-family: inherit; vertical-align: baseline; } /* remember to define focus styles! */ :focus { outline: 0; } body { line-height: 1; color: black;} ol, ul { list-style: none; } /* tables still need 'cellspacing="0"' in the markup */ table { border-collapse: separate; border-spacing: 0; } caption, th, td { text-align: left; font-weight: normal; } blockquote:before, blockquote:after, q:before, q:after { content: ""; } blockquote, q { quotes: "" ""; }
+
+/* top 10 css snipets: http://webdevmania.com/archive/top_10_css_snippets/*/
+
+/*				Header																						*/
+
+
+a { color: #3F5F9A; }
+p, ul, ol, table { margin: 1.5em 0; }
+ul, ol { margin-left: 30px; }
+ul li { list-style: circle; }
+ol li { list-style: decimal; }
+h2 { font-size: 20px; margin-bottom: .2em; }
+h3 { font-size: 17px; margin-bottom: .25em; }
+h4 { font-size: 15px; margin-bottom: .3em; }
+h5 { font-size: 12px; font-weight: bold; margin-bottom: 1em; }
+
+
+#header {
+	width:997px;
+	height:165px;
+	margin:0 auto;
+	background: url('/images/header.jpg') top left no-repeat;
+}
+
+#kosik{
+	height:34px;
+	line-height:34px;
+	margin:86px 0 0 483px;
+	position:absolute;
+	color:#3f5f9a;
+	font-size:12px;
+}
+#kosik a{
+	font-weight:bold;
+	text-decoration:underline;
+	font-size:11px;
+	background:url('/images/kosik_arr.png') right center no-repeat;
+	padding-right:20px
+}
+#kosik strong{
+	color:#d31111;
+	font-size:14px;
+}
+
+#header ul{
+	height:34px;
+	line-height:34px;
+	margin:136px 0 0 431px;
+	position:absolute;
+	color:#3f5f9a;
+	font-size:12px;
+}
+#header ul li{
+	display:inline;
+	background:white url('/images/menubox_left.png') left top no-repeat;
+	line-height:23px;
+	height:23px;
+	float:left;
+	margin-right:5px;
+}
+#header ul li a{
+	background:url('/images/menubox_right.png') right center no-repeat;
+	padding:8px;
+	color:#3f5f9a;
+	text-decoration:none;
+	font-size:12px;
+}
+/*				Body																						*/
+/*																											*/
+/*																											*/
+
+html{
+    background:#efefef url('/images/html.png') top left repeat-x;
+}
+body{
+	font-family:arial, sans-serif, verdana;
+    font-size: 12px;
+    line-height: 1.5em;
+    color: #646464;
+}
+input { font-family:arial, sans-serif, verdana; font-size: 12px; color: #646464; }
+strong{
+	font-weight:bold;
+}
+#body {
+	width:997px;
+	margin:0 auto;
+	background:url('/images/body.png') top left repeat-y;
+}
+#body-bottom {
+	clear:both;
+	height:11px;
+	background:url('/images/body-bottom.png') top left no-repeat;
+}
+#content {
+	width:810px;
+	float:right;
+}
+#content .main{
+	float:left;
+	width:627px;
+	padding-top:20px;
+}
+.uvodni #content .main{
+	background:url('/images/uvodni_main.png') top left no-repeat;
+}
+.detail #content .main{
+	background:url('/images/detail_main.jpg') top left no-repeat;
+	padding-top:40px;
+}
+#content .kosik{
+	background:url('/images/kosik_main.jpg') top left no-repeat;
+	float:left;
+	width:810px;
+}
+#content .kosik .stin{
+	background:url('/images/kosik_side_stin.jpg') top left no-repeat;
+	float:right;
+	width:30px;
+	height:468px;
+}
+.kosik #content .main{
+
+}
+a.promo{
+	margin-left:4px;
+}
+#promotext {
+	margin:28px 0 0 37px;
+}
+#promotext .nadpis{
+	width:296px;
+	height:27px;
+	background:url('/images/promo_nadpis.png') left top no-repeat;
+}
+#promotext .nadpis span{
+	display:none;
+}
+#promotext td{
+	vertical-align:top;
+	color:#4d4d4d;
+	font-size:13px;
+	line-height:16px;
+}
+td.cara {
+	border-top:1px solid #e8e8e8;
+	padding:5px 8px;
+}
+#promotext td.first{
+	border:none;
+	padding-top:0;
+}
+#content #side{
+	float:right;
+	background:url('/images/side_top.jpg') top right no-repeat;
+	text-align:left;
+}
+.kosik #content #side{
+	background:none;
+}
+#content #side .inner{
+	text-align:center;
+	padding-right:18px;
+}
+#content #side{
+	width:183px;
+}
+#content #side .stin{
+	width:24px;
+	height:828px;
+	position:absolute;
+}
+.uvodni #content #side .stin{
+	background:url('/images/uvodni_side_stin.png') top right no-repeat;
+
+}
+.detail #content #side .stin{
+	background:url('/images/detail_side_stin.png') top left no-repeat;
+}
+
+#side .reference{
+	margin-top:226px;
+}
+#side .heureka{
+	margin-top:10px;
+}
+.kosik #side .heureka {
+margin-top:70px;
+}
+#side img{
+	margin-top:35px;
+}
+#side .hr{
+	margin:20px 7px 0 0;
+	height:129px;
+	background:url('/images/side_hr.png') top right no-repeat;
+}
+.main div.hr{
+	clear:both;
+	border-width:0;
+	background:url('/images/hr.png') top left no-repeat;
+	width:584px;
+	height:23px;
+	margin:18px 0 5px 22px;
+}
+.kosik .main div.hr {
+	margin-top:48px;
+}
+#tools{
+	padding:3px 26px 0 35px;
+	height:20px;
+}
+#tools .hledej{
+	float:left;
+	width:236px;
+}
+.hledej input {
+	border:1px solid #d0d0d0;
+	padding:0px 5px 1px 5px;
+	color:#d0d0d0;
+	font-size:12px;
+	line-height:16px;
+}
+.hledej .btn {
+	margin:0px 0 0 6px;
+	border:none;
+	width:25px;
+	height:18px;
+	background:url('/images/hledat.png') top left no-repeat;
+}
+#tools .zobrazit{
+	float:right;
+	width:267px;
+	text-align:right;
+	color:#d00000;
+	font-size:12px;
+	line-height:20px;
+}
+#tools .zobrazit a{
+	color:#7e7e7e;
+	background:url('/images/updown.png') left center no-repeat;
+	padding:0 5px 0 25px;
+	text-decoration:none;
+}
+.produkty{
+	border-top:1px solid #e5e5e5;
+	clear:both;
+	margin:5px 21px 30px 21px;
+	padding:25px 25px 0 25px;
+	width:535px;
+	overflow:hidden;
+}
+.kosik .produkty {
+	border:none;
+}
+.produkt {
+	float:left;
+	width:120px;
+	text-align:center;
+	color:black;
+	font-size:14px;
+	line-height:18px;
+    margin-bottom: 20px;
+}
+.produkty div.stred{
+		padding:0 83px;
+}
+.produkt a {
+	color:#3f5f9a;
+	font-weight:bold;
+}
+.produkt div{
+	height:180px;
+}
+a.koupit{
+	width:48px;
+	height:17px;
+	background:url('/images/koupit.png') top left no-repeat;
+	display:block;
+	margin: 4px auto;
+}
+.buble {
+	position:absolute;
+	margin:10px 0 0 90px;
+}
+.produkt .tip{
+	background:url('/images/buble_tip.png') top left no-repeat;
+}
+.produkt .akce{
+	background:url('/images/buble_akce.png') top left no-repeat;
+}
+.produkt .darek{
+	background:url('/images/buble_darek.png') top left no-repeat;
+}
+#breadcrumbs{
+	font-size:12px;
+	font-weight:bold;
+	margin:0px 36px;
+	color:#7e7e7e;
+
+}
+#breadcrumbs a{
+	color:#7e7e7e;
+	text-decoration:none;
+}
+#breadcrumbs .here{
+	font-weight:normal;
+	color:#d00000;
+}
+#zalozky {
+	border-top:1px solid #ededed;
+	width:597px;
+	color:#d1d1d1;
+	font-size:15px;
+	height:40px;
+	margin:17px 0 0 17px
+}
+#zalozky div.right{
+	background: url('/images/zalozky_right.png') right top no-repeat;
+	padding-right:10px;
+	padding-left:10px;
+}
+#zalozky div.middle{
+	position:relative;
+	top:-10px;
+	float:right;
+	background:url('/images/zalozky_middle.png') top right repeat-x;
+
+}
+#zalozky div.left{
+	background:url('/images/zalozky_left.png') left top no-repeat;
+	width:10px;
+	height:50px;
+	position:absolute;
+}
+#zalozky a{
+	font-size:12px;
+	color:#7e7e7e;
+	text-decoration:none;
+	line-height:43px;
+	padding:0 10px 13px 10px;
+	background:url('/images/zalozka.png') center bottom no-repeat;
+}
+#nahled {
+	width:214px;
+	float:left;
+	text-align:center;
+	padding:0 0 0 23px;
+}
+#nahled #scrol{
+	margin-top:30px;
+	width:214px;
+	clear:both;
+}
+#scrol .left, #scrol .right, #scrol .middle{
+	float:left;
+	display:block;
+	height:66px;
+}
+
+#scrol .left, #scrol .right{
+	width:16px;
+}
+#scrol .left{
+	background:url('/images/nahled_left.png') left top no-repeat;
+}
+#scrol .right{
+	background:url('/images/nahled_right.png') left top no-repeat;
+}
+#scrol .middle{
+	width:182px;
+	overflow:hidden;
+}
+#scrol #in{
+	text-align:left;
+	padding-left:18px;
+	padding-top:3px;
+	border-top:1px solid #ebebeb;
+	border-bottom:1px solid #ebebeb;
+	height:61px;
+}
+#scrol img {
+	margin-right:25px;
+}
+#popis {
+	width:320px;
+	float:right;
+	color:#646464;
+	padding-right:45px;
+	margin-top:10px;
+}
+#popis .title{
+	font-size:30px;
+	margin:0;
+	padding:0;
+}
+#popis p{
+	font-size:12px;
+	margin-top:10px;
+	line-height:15px;
+	text-align:justify;
+}
+#popis .stav{
+	clear:both;
+	border-top:1px solid #e5e5e5;
+	background:url('/images/stav_arr.png') 300px center no-repeat;
+}
+#popis .first{
+	border-top:none !important;
+	margin-top:20px;
+}
+#popis a{
+	color:#7e7e7e;
+	font-size:12px;
+	font-weight:bold;
+	text-decoration:none;
+	padding-left:20px;
+	line-height:29px;
+	display:block;
+}
+#popis a.true{
+	background:url('/images/stav_true.png') left center no-repeat;
+}
+.detail .main div.hr{
+	background:url('/images/detail_hr.png') left bottom no-repeat;
+	height:50px;
+	width:627px;
+	margin:0;
+}
+#nabidky{
+	padding: 8px 23px 0 23px;
+}
+#nabidky div.header, #obsah div.header{height:31px;overflow:hidden;}
+#nabidky table{
+	line-height:15px;
+	font-size:12px;
+	color:#7e7e7e;
+}
+#nabidky td{
+	text-align:center;
+	vertical-align:middle;
+	border-right:#dbdbdb 1px solid;
+	border-bottom:#f2f2f2 4px solid;
+	padding:10px 10px 5px 10px;
+}
+#nabidky td.popis {
+	color:black;
+	font-size:12px;
+}
+#nabidky td.popis img {
+	margin:5px 0 5px 0;
+}
+#nabidky td.dostanete {
+	text-align:left;
+	font-size:11px;
+}
+#nabidky td.dostanete a{
+	text-decoration:none;
+	color:#7e7e7e;
+}
+#nabidky td.dostanete img{
+	display:block;
+	margin-top:5px;
+}
+#nabidky td.darek {
+	text-align:left;
+}
+#nabidky td.cena {
+	border-right:none;
+	color:#d00000;
+	font-size:15px;
+	font-weight:bold;
+}
+#nabidky tr.head td{
+	background:#adadad;
+	color:white;
+	font-size:12px;
+	line-height:24px;
+	font-weight:bold;
+	text-align:center;
+	border:none;
+		padding:0px;
+}
+#prubeh {
+	width:747px;
+	height:54px;
+	margin:50px 0 0 17px;
+	border-bottom:1px solid #ededed;
+}
+#prubeh div {
+	float:left;
+	width:205px;
+	height:54px;
+}
+#prubeh div.in div {
+	background:url(/images/kosik_step.png) center bottom no-repeat;
+}
+#prubeh .step1{
+	background:url(/images/kosik_step1.png) center top no-repeat;
+}
+#prubeh .step2{
+	background:url(/images/kosik_step2.png) center top no-repeat;
+	padding:0 65px
+}
+#prubeh .step3{
+	background:url(/images/kosik_step3.png) center top no-repeat;
+}
+
+#obsah{
+	width:702px;
+	margin: 20px 0 0 40px;
+}
+
+#obsah table{
+	line-height:15px;
+	font-size:12px;
+	color:#7e7e7e;
+
+}
+.basket-table td{
+	text-align:center;
+	vertical-align:middle;
+	height:68px;
+	border-right:#dbdbdb 1px solid;
+	border-bottom:#f2f2f2 4px solid;
+	padding:10px 10px 5px 10px;
+}
+.basket-table td.popis {
+	font-weight:bold;
+	text-align:left;
+}
+.basket-table td.popis a{
+	text-decoration:none;
+	color:#7e7e7e;
+}
+.basket-table td.popis img {
+	display:block;
+	margin:5px 0 5px 0;
+}
+.basket-table td.darek {
+	text-align:left;
+}
+.basket-table td.cena, #obsah td.nahled {
+	border-right:none;
+	font-weight:bold;
+}
+.basket-table tr.head td{
+	background:#adadad;
+	color:white;
+	font-size:12px;
+	line-height:24px;
+	font-weight:bold;
+	text-align:center;
+	border:none;
+	padding:0px;
+	height:25px;
+}
+.basket-table tr.head td.left{
+	text-align:left;
+	padding-left:20px;
+}
+.basket-table tr.dohromady td{
+	border:none;
+	font-weight:bold;
+	text-align:right;
+	height:38px;
+}
+.basket-table tr.dohromady td.cena{
+	text-align:center;
+	color:white;
+	background:#adadad;
+	border:none;
+}
+#tlacitka{
+	width:702px;
+	margin: 20px 0 0 0px;
+}
+a.btn{
+	width:127px;
+	height:25px;
+	line-height:25px;
+	display:block;
+	text-align:center;
+	vertical-align:middle;
+	text-decoration:none;
+	float:right;
+	padding-left:20px;
+}
+a.objednat{
+	background:url('/images/btn_objednat.png') top right no-repeat;
+	color:white;
+	font-weight:bold;
+	font-size:13.4px;
+}
+input.submit {
+    width:127px;
+	height:25px;
+	line-height:25px;
+	display:block;
+	text-align:center;
+	vertical-align:middle;
+    background:url('/images/btn_objednat.png') top right no-repeat;
+	color:white;
+	font-weight:bold;
+	font-size:13.4px;
+    border: none;
+    cursor: pointer;
+}
+a.vysypat{
+	font-size:11.4px;
+	color:#a5a5a5;
+	background:url('/images/btn_vysypat.png') top right no-repeat;
+}
+/*				Sidebar																						*/
+/*																											*/
+/*																											*/
+
+#sidebar {
+	width:186px;
+	float:left;
+	background:url('/images/sidebar.jpg') top left no-repeat;
+	padding-bottom:20px;
+}
+
+#sidebar #tri{
+	height:54px;
+	width:167px;
+	position:absolute;
+}
+#tri a{
+	display:block;
+	width:35px;
+	height:35px;
+	position:absolute;
+	margin-top:14px;
+}
+#tri a.o2{
+	margin-left:40px;
+}
+#tri a.tmobile{
+	margin-left:85px;
+}
+#tri a.vodafone{
+	margin-left:128px;
+}
+#sidebar #stin{
+	height:873px;
+	width:20px;
+	position:absolute;
+	margin-left:167px;
+}
+.uvodni #sidebar #stin{
+	background: url('/images/uvodni_sidebar_stin.png') top left no-repeat;
+}
+.detail #sidebar #stin{
+	background: url('/images/detail_sidebar_stin.png') top left no-repeat;
+}
+.kosik #sidebar #stin{
+	background: url('/images/kosik_sidebar_stin.png') top left no-repeat;
+}
+#sidebar #stin div{
+	width:20px;
+	height:99px;
+	display:block;
+}
+.uvodni #sidebar #stin div{
+	background:url('/images/uvodni_sidebar_corner.jpg') left top no-repeat;
+}
+.detail #sidebar #stin div{
+	background:url('/images/detail_sidebar_corner.jpg') left top no-repeat;
+}
+.kosik #sidebar #stin div{
+	background:url('/images/kosik_sidebar_corner.jpg') left top no-repeat;
+		height:108px;
+}
+.menu{
+	list-style:none;
+	font-size:12px;
+    margin: 0 !important;
+}
+.menu li{
+	padding:2px 0 0 16px;
+	height:28px;
+	overflow:hidden;
+	background: url('/images/sidebar_cara.gif') top left no-repeat;
+    list-style: none;
+}
+.menu li.first {background:none;}
+.menu a{
+	padding:0 0 0px 30px;
+	color:#7e7e7e;
+	text-decoration:none;
+	display:block;
+	line-height:28px;
+}
+.menu li.selected a{
+	font-weight:bold;
+}
+#znacky.menu li.selected a{
+	background-image: url('/images/menu_vybrano.png');
+}
+.menu li a:hover{
+	text-decoration:underline;
+}
+.menu li:first-child {
+	background:none;
+}
+#znacky.menu{
+	padding-top:78px;
+}
+#znacky.menu a{
+	background: url('/images/menu_odrazka.png') left center no-repeat;
+}
+#sidebar .nadpis{
+	border-bottom:3px solid #d00000;
+	margin:20px 2px 6px 20px;
+	padding-left:16px;
+}
+.nadpis span{
+	background:#d00000;
+	padding:1px 14px 0px 14px;
+	font-size:11px;
+	color:white;
+    line-height: 1em;
+}
+
+
+/*				Footer																						*/
+/*																											*/
+/*																											*/
+
+#footer {
+	clear:both;
+	height:240px;
+	width:998px;
+	margin:0 auto;
+	background:url('/images/footer.jpg') top left no-repeat;
+	color:#afafaf;
+	font-size:12px;
+	line-height:17px;
+}
+#footer a{
+	color:#afafaf;
+	text-decoration:underline;
+}
+#footer #red {
+	width:566px;
+	height:39px;
+	line-height:39px;
+	margin:0 auto;
+	font-size:14px;
+	color:white;
+}
+#footer #red a{
+	text-decoration:none;
+	color:white;
+}
+#footer #gray{
+	clear:both;
+	padding:30px 0 0 18px;
+}
+#footer #gray p{
+	float:left;width:294px;padding-left:40px;
+}
+/*				Special																						*/
+/*																											*/
+/*																											*/
+
+h1 { font-size: 30px; padding: 20px 36px; color: #7E7E7E; line-height: 1.1em; }
+
+
+.padded { padding: 0 36px; }
+.padded h1 { padding-left:0; padding-right:0; }
+
+.new-line { clear: left; }
+
+.buy-button { background: none; border: none; cursor: pointer; }
+
+#header { position: relative; }
+#site-logo { position: absolute; top: 40px; left: 30px; width: 370px; height: 100px; }
+#site-logo a { display: block; width: 100%; height: 100%; line-height: 500px; overflow: hidden; }
+
+.required { color: #D00000; font-weight: bold; }
+
+
+th { font-weight: bold; }
+.form-table { border-collapse: collapse; width: 100%; }
+.form-table th, .form-table td { border-bottom:#f2f2f2 1px solid; padding: 5px 10px; }
+
+div.clear { font-size: 1px; line-height: 1px; height: 1px; clear: both;}
+.float-right { float: right; }
+
+.formError { color: #D00000; }
+.errorExplanation { color: #D00000; background-color: #ffcccc; padding: 1em; }
+
+#footer p { margin: 0; }
+#header li { margin-left: 0;}
+
+.produkt h2 { font-size: 14px; }
+
+#nabidky table, .basket-table { margin: 0; }
